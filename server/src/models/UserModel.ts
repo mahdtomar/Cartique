@@ -4,7 +4,7 @@ interface IUser extends Document {
     name: string;
     email: string;
     password: string;
-    adderss: string;
+    address: string;
     phone: string;
     created_at: Date;
     user_type: "customer" | "vendor" | "admin";
@@ -22,7 +22,7 @@ const schema = new Mongoose.Schema<IUser>({
         required: true,
     },
     password: { type: String, required: true },
-    adderss: String,
+    address: String,
     phone: String,
     created_at: Date,
     user_type: {
