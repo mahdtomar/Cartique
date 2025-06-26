@@ -1,6 +1,6 @@
 import { Response } from "express";
 
-const Success = (
+export const Success = (
     res: Response,
     statusCode: number,
     data: any,
@@ -8,7 +8,7 @@ const Success = (
 ) => {
     return res.status(statusCode).send({ data, message });
 };
-const Fail = (
+export const Fail = (
     res: Response,
     statusCode: number,
     message: string | undefined
@@ -16,11 +16,10 @@ const Fail = (
     return res.status(statusCode).send({ message });
 };
 
-const Error = (
+export const Error = (
     res: Response,
     statusCode: number,
     message: string | undefined
 ) => {
     return res.status(statusCode).send({ message });
 };
-module.exports = { Success, Fail, Error };

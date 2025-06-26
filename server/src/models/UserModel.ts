@@ -1,5 +1,5 @@
 import Mongoose, { Types, Model, Document } from "mongoose";
-const user_types = ["customer", "vendor", "admin"];
+import { Role, VALID_ROLES } from "../types/jwt.js";
 interface IUser extends Document {
     name: string;
     email: string;
@@ -7,7 +7,7 @@ interface IUser extends Document {
     address: string;
     phone: string;
     created_at: Date;
-    user_type: "customer" | "vendor" | "admin";
+    user_type: Role;
     avatar: string;
     favorite_products: Types.ObjectId[];
 }
@@ -28,7 +28,7 @@ const schema = new Mongoose.Schema<IUser>({
     user_type: {
         type: String,
         required: true,
-        enum: user_types,
+        enum: VALID_ROLES,
     },
     avatar: String,
     // cart: [cartSchema],
