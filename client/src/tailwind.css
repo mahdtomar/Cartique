@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+.container {
+    max-width: calc(1440px - (2 * 140px));
+    padding: 0px 4px;
+    margin: 0px auto;
+    @apply w-full;
+}
+
+.navlink {
+    position: relative;
+    &::after {
+        content: "";
+        transition: width 0.3s ease-in-out;
+        @apply block absolute left-0 bottom-[-2] bg-black w-0 h-0.5;
+    }
+    &:hover,
+    &.active {
+        &::after {
+            width: 100%;
+        }
+    }
+}

@@ -2,8 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 * {
-    margin: 0px;
-    padding: 0px;
     box-sizing: border-box;
     scroll-behavior: smooth;
     cursor: url("./assets/images/cursor-white.svg"), auto;
@@ -64,13 +62,7 @@ input[type="file"] {
     align-items: center;
     justify-content: space-between;
 }
-.container {
-    max-width: calc(1440px - (2 * 140px));
-    padding: 0px 140px;
-    width: 100%;
-    padding: 0px 10px;
-    margin: 0px auto;
-}
+
 
 button {
     border: none;
@@ -146,4 +138,9 @@ a {
 .sm-text {
     font-size: 14px;
     line-height: 150%;
+}
+.playfair-regular {
+    font-family: "Playfair Display";
+    font-style: normal;
+    font-weight: 400 900;
 }
