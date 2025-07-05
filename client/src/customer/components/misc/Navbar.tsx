@@ -19,7 +19,10 @@ const Navbar = () => {
         <nav className="mt-6 mx-0">
             <div className="flex justify-between py-2 container">
                 <Logo />
-                <div className="search border-1 shadow-md flex p-2 gap-2 justify-start rounded-sm overflow-hidden w-[444px]">
+                <label
+                    className="search border-1 shadow-md flex p-2 gap-2 justify-start rounded-sm overflow-hidden w-[444px]"
+                    htmlFor="navbar-search"
+                >
                     <img
                         src={searchIcon}
                         alt="Magnifying Glass icon"
@@ -29,8 +32,9 @@ const Navbar = () => {
                         type="text"
                         placeholder="Search"
                         className="block w-full focus:outline-0"
+                        id="navbar-search"
                     />
-                </div>
+                </label>
                 <ul className="flex gap-7 items-center justify-between">
                     {links.map((link) => (
                         <li key={link.url}>

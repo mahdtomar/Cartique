@@ -6,6 +6,15 @@
     margin: 0px auto;
     @apply w-full;
 }
+.landing-page-section {
+    @apply my-20;
+}
+.category-card {
+    @apply flex relative flex-col justify-center items-start w-full h-[123px] overflow-hidden rounded-md gap-4 pl-5;
+}
+.category-card-image {
+    @apply absolute right-0;
+}
 
 .navlink {
     position: relative;
@@ -20,4 +29,9 @@
             width: 100%;
         }
     }
+}
+
+.heading-1 {
+    font-size: 53px;
+    font-family: "Playfair Display", "Poppins", sans-serif;
 }
