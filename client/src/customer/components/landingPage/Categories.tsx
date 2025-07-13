@@ -2,15 +2,28 @@ import smartPhones from "./../../assets/images/smartphones-cover-image.png";
 import accessories from "./../../assets/images/accessories-cover-image.png";
 import electronics from "./../../assets/images/electronics-cover-image.png";
 import superMarket from "./../../assets/images/superMarket-cover-image.png";
+import { useTranslation } from "react-i18next";
 const Categories = () => {
+    const categories = {
+        title: "تسوق حسب الفئة",
+        description: "ابحث عما تريده بكل سهولة.",
+        smartPhone: "الهواتف الذكية",
+        electronics: "الإلكترونيات",
+        accessories: "الاكسسوارات",
+        superMarket: "السوبر ماركت",
+        seeMore: "شاهد المزيد",
+    };
+    const { t } = useTranslation();
     return (
         <section className="landing-page-section text-center container">
-            <h2 className="text-[35px]">shop by category</h2>
-            <p className="mt-2 mb-10">find exactly what you're looking for with ease.</p>
+            <h2 className="text-[35px]">{t("categories.title")}</h2>
+            <p className="mt-2 mb-10">{t("categories.description")}</p>
             <div className="grid grid-cols-2 gap-12 capitalize">
                 <div className="category-card bg-[#7ACCFF]">
-                    <span>smart phone</span>
-                    <button className="primary">see more</button>
+                    <span>{t("categories.smartPhone")}</span>
+                    <button className="primary">
+                        {t("categories.seeMore")}
+                    </button>
                     <img
                         className="category-card-image"
                         src={smartPhones}
@@ -18,8 +31,10 @@ const Categories = () => {
                     />
                 </div>
                 <div className="category-card bg-[#8ED2DA]">
-                    <span>accessories</span>
-                    <button className="primary">see more</button>
+                    <span>{t("categories.accessories")}</span>
+                    <button className="primary">
+                        {t("categories.seeMore")}
+                    </button>
                     <img
                         className="category-card-image"
                         src={accessories}
@@ -27,8 +42,10 @@ const Categories = () => {
                     />
                 </div>
                 <div className="category-card bg-[#BDA4E5]">
-                    <span>electronics</span>
-                    <button className="primary">see more</button>
+                    <span>{t("categories.electronics")}</span>
+                    <button className="primary">
+                        {t("categories.seeMore")}
+                    </button>
                     <img
                         className="category-card-image"
                         src={electronics}
@@ -36,8 +53,10 @@ const Categories = () => {
                     />
                 </div>
                 <div className="category-card bg-[#FC9832]">
-                    <span>super market</span>
-                    <button className="primary">see more</button>
+                    <span>{t("categories.superMarket")}</span>
+                    <button className="primary">
+                        {t("categories.seeMore")}
+                    </button>
                     <img
                         className="category-card-image"
                         src={superMarket}

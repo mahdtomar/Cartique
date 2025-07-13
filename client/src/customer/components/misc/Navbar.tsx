@@ -4,17 +4,28 @@ import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 import cartIcon from "./../../assets/icons/ShoppingCartSimple.svg";
+import { useTranslation } from "react-i18next";
+import { useContext } from "react";
+import { languageContext } from "../../context/LanguageProvider";
 const Navbar = () => {
     type NavLink = {
         url: string;
         title: string;
     };
-
+    const { t, i18n } = useTranslation();
     const links: NavLink[] = [
-        { url: "/", title: "home" },
-        { url: "/store", title: "store" },
-        { url: "/contact-us", title: "contact us" },
+        { url: "/", title: t("navigation.home") },
+        { url: "/store", title: t("navigation.store") },
+        { url: "/contact-us", title: t("navigation.contact") },
     ];
+    const { toggleLang } = useContext(languageContext);
+    // const toggleLang = () => {
+    //     if (i18n.language === "ar") {
+    //         i18n.changeLanguage("en");
+    //     } else {
+    //         i18n.changeLanguage("ar");
+    //     }
+    // };
     return (
         <nav className="mt-6 mx-0">
             <div className="flex justify-between py-2 container">
@@ -55,9 +66,14 @@ const Navbar = () => {
                     </li>
                     <li>
                         <Link to={"/login"}>
-                            <button className="primary">Login</button>
+                            <button className="primary">
+                                {t("navigation.login")}
+                            </button>
                         </Link>
                     </li>
+                    <button onClick={toggleLang}>
+                        {i18n.language === "ar" ? "EN" : "AR"}
+                    </button>
                 </ul>
             </div>
         </nav>

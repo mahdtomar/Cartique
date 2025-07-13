@@ -10,10 +10,10 @@
     @apply my-20;
 }
 .category-card {
-    @apply flex relative flex-col justify-center items-start w-full h-[123px] overflow-hidden rounded-md gap-4 pl-5;
+    @apply flex relative flex-col justify-center items-start w-full h-[123px] overflow-hidden rounded-md gap-4 pl-5 rtl:pl-0 rtl:pr-5;
 }
 .category-card-image {
-    @apply absolute right-0;
+    @apply absolute right-0 rtl:left-0 rtl:right-auto rtl:rotate-y-180;
 }
 
 .navlink {

@@ -1,0 +1,24 @@
+{
+    "navigation": {
+        "home": "home",
+        "store": "store",
+        "contact": "contact us",
+        "login": "Login"
+    },
+    "hero": {
+        "title": "Elevate Your Style",
+        "subtitle": "Discover Our Latest Collection!",
+        "description": "Shop our exclusive range of premium products with unbeatable prices.",
+        "shopNow": "Shop Now",
+        "exploreDeals": "Explore Deals"
+    },
+    "categories": {
+        "title": "shop by category",
+        "description": "find exactly what you're looking for with ease.",
+        "smartPhone": "Smart Phone",
+        "electronics": "Electronics",
+        "accessories": "Accessories",
+        "superMarket": "Super Market",
+        "seeMore": "See More"
+    }
+}
