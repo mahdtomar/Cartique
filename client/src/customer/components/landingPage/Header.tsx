@@ -14,6 +14,9 @@ const Header = () => {
                     <h1 className="capitalize heading-1">
                         {t("hero.title")}
                     </h1>
+                    <h1 className="capitalize heading-1">
+                        test
+                    </h1>
                     <p className="mt-4 mb-10">
                         {t("hero.description")}
                     </p>
