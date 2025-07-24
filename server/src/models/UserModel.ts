@@ -29,6 +29,7 @@ const schema = new Mongoose.Schema<IUser>({
         type: String,
         required: true,
         enum: VALID_ROLES,
+        default: "customer",
     },
     avatar: String,
     // cart: [cartSchema],

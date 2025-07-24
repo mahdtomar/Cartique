@@ -4,15 +4,6 @@ import electronics from "./../../assets/images/electronics-cover-image.png";
 import superMarket from "./../../assets/images/superMarket-cover-image.png";
 import { useTranslation } from "react-i18next";
 const Categories = () => {
-    const categories = {
-        title: "تسوق حسب الفئة",
-        description: "ابحث عما تريده بكل سهولة.",
-        smartPhone: "الهواتف الذكية",
-        electronics: "الإلكترونيات",
-        accessories: "الاكسسوارات",
-        superMarket: "السوبر ماركت",
-        seeMore: "شاهد المزيد",
-    };
     const { t } = useTranslation();
     return (
         <section className="landing-page-section text-center container">

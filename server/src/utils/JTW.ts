@@ -11,9 +11,12 @@ export const createAccessToken = (
     if (!process.env.JWT_KEY) {
         return Error(res, 401, "Authentication Error");
     }
-    const token = jwt.sign(payload, process.env.JWT_KEY, {
+    const signature = `${payload}${process.env.JWT_KEY}`;
+    const CryptedSignature = Buffer.from(signature).toString("base64");
+    const token = jwt.sign(payload, CryptedSignature, {
         expiresIn: "15m",
     });
+
     req.user = payload;
     return token;
 };
@@ -26,9 +29,12 @@ export const createRefreshToken = (
     if (!process.env.JWT_KEY) {
         return Error(res, 401, "Authentication Error");
     }
-    const token = jwt.sign(payload, process.env.JWT_KEY, {
+    const signature = `${payload}${process.env.JWT_KEY}`;
+    const CryptedSignature = Buffer.from(signature).toString("base64");
+    const token = jwt.sign(payload, CryptedSignature, {
         expiresIn: "7d",
     });
+
     req.user = payload;
     return token;
 };

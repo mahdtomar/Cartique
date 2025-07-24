@@ -1,20 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Changa:wght@200..800&display=swap");
+@import './styles/_variables.scss';
+@import './styles/_keyframe-animations.scss';
 * {
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    cursor: url("./assets/images/cursor-white.svg"), auto;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  cursor: url("./assets/images/cursor-white.svg"), auto;
 }
-[dir="rtl"] {
-    direction: rtl;
-    text-align: right;
-}
+
 :root {
-    --cream: #f4e8db;
-    --cream-hover: #f0e1d0;
-    --light-orange: #fedebe;
-    --green: #16bf00;
+  --cream: #f4e8db;
+  --cream-hover: #f0e1d0;
+  --light-orange: #fedebe;
+  --green: #16bf00;
 }
 
 h1,
@@ -23,17 +25,12 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Playfair Display", serif;
-    font-weight: 400;
+  font-family: "Playfair Display", serif;
+  font-weight: 400;
 }
-h1::-moz-selection,
-h2::-moz-selection,
-h3::-moz-selection,
-h4::-moz-selection,
-h5::-moz-selection,
-h6::-moz-selection {
-    background-color: black;
-    color: white;
+h1::-moz-selection, h2::-moz-selection, h3::-moz-selection, h4::-moz-selection, h5::-moz-selection, h6::-moz-selection {
+  background-color: black;
+  color: white;
 }
 h1::selection,
 h2::selection,
@@ -41,144 +38,152 @@ h3::selection,
 h4::selection,
 h5::selection,
 h6::selection {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
 }
 
 p,
 span,
 a {
-    line-height: 150%;
+  line-height: 150%;
 }
-p::-moz-selection,
-span::-moz-selection,
-a::-moz-selection {
-    background-color: black;
-    color: white;
+p::-moz-selection, span::-moz-selection, a::-moz-selection {
+  background-color: black;
+  color: white;
 }
 p::selection,
 span::selection,
 a::selection {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
 }
 
 .logo {
-    font-family: "Pacifico", "Poppins", sans-serif;
+  font-family: "Pacifico", "Poppins", sans-serif;
 }
 
 body {
-    font-family: "Poppins", sans-serif;
-    font-size: 18px;
-    cursor: url("./assets/images/cursor.png"), auto;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  cursor: url("./assets/images/cursor.png"), auto;
+}
+body[dir=rtl] {
+  font-family: "cairo", sans-serif;
+  /* text-align: right; */
+}
+body[dir=rtl] h1,
+body[dir=rtl] h2,
+body[dir=rtl] h3,
+body[dir=rtl] h4,
+body[dir=rtl] h5,
+body[dir=rtl] h6 {
+  font-family: "changa", serif;
+  /* text-align: right; */
 }
 
 input,
 textarea {
-    cursor: url("./assets/images/cursor-text.png"), text;
+  cursor: url("./assets/images/cursor-text.png"), text;
 }
 
-input[type="file"]:hover {
-    cursor: url("./assets/images/cursor-pointer-white.svg"), pointer;
+input[type=file]:hover {
+  cursor: url("./assets/images/cursor-pointer-white.svg"), pointer;
 }
 
 .flex2 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .flexv {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
 button {
-    border: none;
-    text-transform: capitalize;
-    font-size: 18px;
-    cursor: url("./assets/images/cursor-pointer-white.svg"), pointer;
+  border: none;
+  text-transform: capitalize;
+  font-size: 18px;
+  cursor: url("./assets/images/cursor-pointer-white.svg"), pointer;
 }
 button.primary {
-    padding: 7px 10px;
-    font-size: 18px;
-    border-radius: 4px;
-    background-color: var(--cream);
-    transition: background-color 0.3s ease-in-out;
+  padding: 7px 10px;
+  font-size: 18px;
+  border-radius: 4px;
+  background-color: var(--cream);
+  transition: background-color 0.3s ease-in-out;
 }
 button.primary:hover {
-    background-color: var(--cream-hover);
+  background-color: var(--cream-hover);
 }
 button.secondary {
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    transition: gap 0.2s ease-in-out;
-}
-body[dir="rtl"] button.secondary img {
-  transform: rotate(180deg); 
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  transition: gap 0.2s ease-in-out;
 }
 button.secondary:hover {
-    gap: 12px;
+  gap: 12px;
 }
 
 .cursor-pointer {
-    cursor: url("./assets/images/cursor-pointer-white.svg"), pointer;
+  cursor: url("./assets/images/cursor-pointer-white.svg"), pointer;
 }
 
 a {
-    cursor: url("./assets/images/cursor-pointer-white.svg"), pointer;
-    text-decoration: none;
-    color: inherit;
+  cursor: url("./assets/images/cursor-pointer-white.svg"), pointer;
+  text-decoration: none;
+  color: inherit;
 }
 
 .poppins-light {
-    font-family: "Poppins", sans-serif;
-    font-weight: 300;
-    font-style: normal;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
 }
 
 .poppins-regular {
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .poppins-medium {
-    font-family: "Poppins", sans-serif;
-    font-weight: 500;
-    font-style: normal;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
 }
 
 .poppins-semibold {
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-style: normal;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
 }
 
 .poppins-bold {
-    font-family: "Poppins", sans-serif;
-    font-weight: 700;
-    font-style: normal;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
 }
 
 .poppins-black {
-    font-family: "Poppins", sans-serif;
-    font-weight: 900;
-    font-style: normal;
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: normal;
 }
 
 .sm-text {
-    font-size: 14px;
-    line-height: 150%;
+  font-size: 14px;
+  line-height: 150%;
 }
 
 .playfair-regular {
-    font-family: "Playfair Display";
-    font-style: normal;
-    font-weight: 400 900;
-} /*# sourceMappingURL=App.css.map */
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 400 900;
+}/*# sourceMappingURL=App.css.map */
