@@ -8,6 +8,7 @@ import cors from "cors";
 import AuthRouter from "./routes/AuthRoutes.js";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import ProductRouter from "./routes/ProductsRouter.js";
 const app = express();
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -26,6 +27,7 @@ app.use(
     })
 );
 app.use("/auth", AuthRouter);
+app.use("/product", ProductRouter);
 async function connectToDB() {
     try {
         if (!DB_URI) {
