@@ -28,7 +28,7 @@ const Navbar = () => {
     // };
     return (
         <nav className="mt-6 mx-0">
-            <div className="flex justify-between py-2 container">
+            <div className="flex justify-between py-2 container capitalize">
                 <Logo />
                 <label
                     className="search border-1 shadow-md flex p-2 gap-2 justify-start rounded-sm overflow-hidden w-[444px]"

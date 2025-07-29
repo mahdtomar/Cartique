@@ -47,11 +47,11 @@ export const Register = async (req: Request, res: Response) => {
         });
 
         await newUser.save();
-        res.cookie("access-token", accessToken, {
+        res.cookie("accessToken", accessToken, {
             httpOnly: true,
             expires: new Date(Date.now() + 900000),
         });
-        res.cookie("refresh-token", refreshToken, {
+        res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
             expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
         });
@@ -97,7 +97,7 @@ export const refreshToken = (
         }
         createAccessToken(req, res, decoded);
         const accessToken = createAccessToken(req, res, decoded);
-        res.cookie("access-token", accessToken, {
+        res.cookie("accessToken", accessToken, {
             httpOnly: true,
             expires: new Date(Date.now() + 900000),
         });

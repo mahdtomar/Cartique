@@ -4,7 +4,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@200..1000&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Changa:wght@200..800&display=swap");
-
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
@@ -68,7 +67,6 @@ body {
 }
 body[dir=rtl] {
   font-family: "cairo", sans-serif;
-  /* text-align: right; */
 }
 body[dir=rtl] h1,
 body[dir=rtl] h2,
@@ -77,7 +75,6 @@ body[dir=rtl] h4,
 body[dir=rtl] h5,
 body[dir=rtl] h6 {
   font-family: "changa", serif;
-  /* text-align: right; */
 }
 
 input,

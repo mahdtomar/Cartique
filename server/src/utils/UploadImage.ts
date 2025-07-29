@@ -27,6 +27,7 @@ export const uploadImage = asyncWrapper(async (req, res, next) => {
         next && next();
     } catch (error) {
         console.error(error);
+        next && next(error)
     }
 });
 // async (req: Request, res: Response, next: NextFunction) => ;

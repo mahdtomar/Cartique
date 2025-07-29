@@ -91,24 +91,7 @@ const ProductForm = () => {
             reader.readAsDataURL(file);
         }
     };
-    const validatePrices = () => {
-        if (basePrice < cost) {
-            return false;
-        }
-        if (basePrice < salePrice) {
-            return false;
-        }
-        if (!basePrice) {
-            return false;
-        }
-        if (!salePrice) {
-            return false;
-        }
-        if (!cost) {
-            return false;
-        }
-        return true;
-    };
+
     const validation = () => {
         setTitleError("");
         setBriefDescriptionError("");
@@ -170,12 +153,14 @@ const ProductForm = () => {
         }
         return valid;
     };
+
     const changeDiscountPercentage = (value: string) => {
         if (basePrice) {
             setSalePrice((+basePrice * (1 - +value / 100)).toFixed(2));
         }
         setDiscountPercentage(value);
     };
+
     const changeSaleValue = (value: string) => {
         if (basePrice) {
             setDiscountPercentage(
@@ -187,6 +172,7 @@ const ProductForm = () => {
         }
         setSalePrice(value);
     };
+    
     return (
         <div className="container shadow ">
             <form

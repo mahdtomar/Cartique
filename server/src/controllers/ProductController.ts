@@ -12,7 +12,8 @@ export const AddProduct = asyncWrapper(async (req: Request, res: Response) => {
             done: {
                 distenation: req.file?.destination,
                 name: req.file?.filename,
-                path:req.file?.path
+                path:req.file?.path,
+                body :req.body
             },
         }),
         "this is the body"
