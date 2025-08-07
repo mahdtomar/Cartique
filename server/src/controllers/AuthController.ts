@@ -88,9 +88,11 @@ export const refreshToken = (
     }
 
     try {
+        const buffer =new Buffer( req.cookies.refreshToken.split(".")[1],'base64')
+        const payload = buffer.toString("utf-8")
         const decoded = jwt.verify(
             req.cookies.refreshToken,
-            process.env.JWT_KEY
+            `${payload}${process.env.JWT_KEY}`
         );
         if (!isCustomPayload(decoded)) {
             return Error(res, 401, "Invalid token payload");

@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import ProductForm from "./pages/ProductForm";
-import VendorLayout from "../layout/VendorLayout";
+import VendorLayout from "@/layout/VendorLayout";
+// import VendorLayout from "../layout/VendorLayout";
 
 const VendorRouter = () => {
     return (

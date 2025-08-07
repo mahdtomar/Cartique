@@ -7,12 +7,13 @@ import { Buffer } from 'node:buffer'
 export const checkToken = (req: Request, res: Response, next: NextFunction) => {
     const accessToken = req.cookies.accessToken;
     console.log(accessToken)
-    const buffer =new Buffer( accessToken.split(".")[1],'base64')
-    const payload = buffer.toString("utf-8")
-    // console.log(JSON.stringify(payload))
+
     if (!accessToken) {
         return Error(res, 401, "Access token missing");
     }
+    const buffer =new Buffer( accessToken.split(".")[1],'base64')
+    const payload = buffer.toString("utf-8")
+    // console.log(JSON.stringify(payload))
 
     if (!process.env.JWT_KEY) {
         return Error(res, 401, "Authentication configuration error");

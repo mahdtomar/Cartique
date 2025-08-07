@@ -82,7 +82,8 @@ textarea {
   cursor: url("./assets/images/cursor-text.png"), text;
 }
 
-input[type=file]:hover {
+input[type=file]:hover,
+.pointer:hover {
   cursor: url("./assets/images/cursor-pointer-white.svg"), pointer;
 }
 

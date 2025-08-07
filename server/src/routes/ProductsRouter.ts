@@ -8,6 +8,6 @@ import { upload } from "../middlewares/multer.js";
 
 const ProductRouter = express.Router();
 
-ProductRouter.post("/add", checkToken , upload.single("image"), AddProduct);
+ProductRouter.post("/add" , upload.single("image"), AddProduct);
 
 export default ProductRouter;

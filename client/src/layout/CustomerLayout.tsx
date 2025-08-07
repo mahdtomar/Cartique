@@ -1,4 +1,5 @@
-import Navbar from "../customer/components/misc/Navbar";
+// import Navbar from "../customer/components/misc/Navbar";
+import Navbar from "@/features/customer/components/misc/Navbar";
 import { Outlet } from "react-router-dom";
 
 const CustomerLayout = () => {

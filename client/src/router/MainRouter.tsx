@@ -1,7 +1,7 @@
+import Register from "@/common/Pages/Register";
+import CustomerRouter from "@/features/customer/CustomerRouter";
+import VendorRouter from "@/features/vendor/VendorRouter";
 import { Route, Routes } from "react-router-dom";
-import CustomerRouter from "../customer/CustomerRouter";
-import Register from "../Pages/Register";
-import VendorRouter from "../vendor/VendorRouter";
 
 const MainRouter = () => {
     return (
