@@ -13,7 +13,7 @@ type formdataTypes = {
 	briefDescription: string;
 	cost: string;
 	finalPrice: string;
-	basePrice:string;
+	basePrice: string;
 	discountPercentage: string;
 	category: string;
 	description: string;
@@ -73,7 +73,7 @@ const ProductForm = () => {
 			title,
 			briefDescription,
 			cost,
-			finalPrice:salePrice,
+			finalPrice: salePrice,
 			discountPercentage,
 			category,
 			description,
@@ -161,10 +161,10 @@ const ProductForm = () => {
 		image,
 	]);
 	return (
-		<div className="container shadow ">
+		<div className="container  ">
 			<form
 				onSubmit={(e) => submitProduct(e)}
-				className="flex flex-col items-stretch p-2 rounded"
+				className="flex flex-col items-stretch p-2 rounded mt-10 shadow-[0px_0px_16px_0px_rgba(0,0,0,0.2)]"
 				id="formi"
 			>
 				<div className="flex gap-4">
@@ -243,7 +243,7 @@ const ProductForm = () => {
 					</div>
 				</div>
 				<div className="mt-2">
-					<p>Description</p>
+					<p className="font-bold">Description</p>
 					<ReactQuill
 						theme="snow"
 						value={description}

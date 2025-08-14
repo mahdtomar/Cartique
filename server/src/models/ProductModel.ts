@@ -23,7 +23,7 @@ type Product = {
     discountPercentage:number;
     finalPrice:number;
     image:string;
-    vendor_id:string;
+    vendor_id:mongoose.ObjectId;
     category:string;
     warehouse_id:string;
     rating:number;

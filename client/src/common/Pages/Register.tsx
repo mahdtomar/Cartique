@@ -1,8 +1,6 @@
 import { useState } from "react";
 import type { FormEvent, ChangeEvent } from "react";
 import Request from "../api/axios";
-import axios from "axios";
-
 const Register = () => {
     // State for form fields
     const [userName, setUserName] = useState<string>("");

@@ -4,9 +4,9 @@ import { Success } from "../utils/ServerResponses.js";
 import Product from "../models/ProductModel.js";
 
 export const AddProduct = asyncWrapper(async (req: Request, res: Response) => {
-    console.log("run add product");
-    console.log(req.body);
-    console.log(req.files)
+    // console.log("run add product");
+    // console.log(req.body);
+    // console.log(req.files)
     const product = new Product({...req.body , vendor_id : req.user?.id})
     await product.save()
     Success(

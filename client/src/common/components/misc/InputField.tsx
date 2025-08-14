@@ -22,7 +22,7 @@ const InputField = ({
     if (type === "text-area") {
         return (
             <label htmlFor={id} className="w-full flex flex-col">
-                <span>{label}</span>
+                <span className=" font-bold">{label}</span>
                 <textarea
                     className="block w-full border focus:outline-0 rounded p-1 resize-none h-[150px]"
                     // type={type}
@@ -39,8 +39,8 @@ const InputField = ({
         );
     }
     return (
-        <label htmlFor={id} className="w-full flex flex-col">
-            <span>{label}</span>
+        <label htmlFor={id} className="w-full flex flex-col font=b">
+            <span className="font-bold">{label}</span>
             <input
                 className="block w-full border focus:outline-0 rounded p-1"
                 type={type}

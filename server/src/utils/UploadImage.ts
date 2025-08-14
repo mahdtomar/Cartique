@@ -22,7 +22,7 @@ export const uploadImage = asyncWrapper(async (req, res, next) => {
             folder: "Cartique",
             resource_type: "image",
         })
-        console.log(result);
+        // console.log(result);
         req.body.cloudinary_url = result.url
         next && next();
     } catch (error) {

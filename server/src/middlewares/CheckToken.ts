@@ -26,6 +26,7 @@ export const checkToken = (req: Request, res: Response, next: NextFunction) => {
             ["vendor", "customer", "admin"].includes(decoded.role)
         ) {``
             req.user = decoded as CustomPayload;
+            console.log(req.user)
             next();
         } else {
             Error(res, 401, "Invalid token payload");

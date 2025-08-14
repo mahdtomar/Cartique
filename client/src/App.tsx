@@ -2,6 +2,7 @@ import "./App.css";
 import "./tailwind.css";
 import MainRouter from "./router/MainRouter";
 import i18n from "./i18n/i18n";
+import UserProvider from "./common/context/UserProvider";
 
 // import i18n from '';
 function App() {
@@ -9,7 +10,9 @@ function App() {
     document.body.dir = i18n.language === "ar" ? "rtl" : "ltr";
     return (
         <>
-            <MainRouter />
+            <UserProvider>
+                <MainRouter />
+            </UserProvider>
         </>
     );
 }
