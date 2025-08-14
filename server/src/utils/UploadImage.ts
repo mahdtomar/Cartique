@@ -1,6 +1,5 @@
 import cloudinary from "cloudinary";
-import { NextFunction, Request, Response } from "express";
-import { Fail, Success } from "./ServerResponses.js";
+import { Fail } from "./ServerResponses.js";
 import asyncWrapper from "./AsyncWrapper.js";
 export const uploadImage = asyncWrapper(async (req, res, next) => {
     cloudinary.v2.config({
@@ -24,6 +23,7 @@ export const uploadImage = asyncWrapper(async (req, res, next) => {
             resource_type: "image",
         })
         console.log(result);
+        req.body.cloudinary_url = result.url
         next && next();
     } catch (error) {
         console.error(error);

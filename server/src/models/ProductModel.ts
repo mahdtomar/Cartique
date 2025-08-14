@@ -1,6 +1,6 @@
+import mongoose from "mongoose";
 import  Mongoose from "mongoose";
 
-const mongoose = require("mongoose");
 const customMinbasePrice : [ (val:number) => boolean, string ] = [
     function (val : number) {
         return val > 0;
@@ -128,6 +128,7 @@ productShcema.methods.toPublicJSON = function () {
 
 // validation
 productShcema.pre<ProductDocument>("save", function (next) {
+    // this.finalPrice = (+this.basePrice - (+this.basePrice * (+this.discountPercentage/100)))
   if (this.basePrice < this.cost) {
     return next(new Error("Base price cannot be less than cost"));
   }
@@ -137,4 +138,4 @@ productShcema.pre<ProductDocument>("save", function (next) {
   next(); 
 });
 const Product = mongoose.model("Product", productShcema);
-module.exports = Product;
+export default Product

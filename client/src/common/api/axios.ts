@@ -9,7 +9,7 @@ interface ApiResponse<T = unknown> {
   headers: RawAxiosResponseHeaders | AxiosResponseHeaders;
   config: AxiosRequestConfig;
 }
-
+let refresh = false
 // Define function type with proper typing
 type RequestFunction = <T = unknown>(
   url: string,
@@ -38,7 +38,9 @@ const Request: RequestFunction = async (
       data,
     };
 
+    refresh = true
     const response = await axios(config);
+    console.log(refresh)
     return response;
   } catch (error) {
     console.error("Request failed:", error);
@@ -52,13 +54,14 @@ axios.interceptors.response.use(
   async (error: AxiosError) => {
     const config = error.config;
     
-    if (error.response?.status === 401 && config) {
-      console.log("UnAuthorized Request, attempting refresh...");
-      
+    if (error.response?.status === 401 && config && refresh) {
+      refresh = false
+      console.log("UnAuthorized Request, attempting refresh..." , refresh);
+
       try {
         //token refresh
         await axios.post(
-          `${import.meta.env.VITE_BACKEND_URL}/refresh`,
+          `${import.meta.env.VITE_BACKEND_URL}/auth/refresh`,
           null,
           { withCredentials: true }
         );

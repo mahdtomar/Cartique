@@ -1,12 +1,12 @@
 import jwt from "jsonwebtoken";
 import { NextFunction, Request, Response } from "express";
 import { Error, Fail, Success } from "../utils/ServerResponses.js";
-import { isCustomPayload } from "../types/jwt.js";
-import { createAccessToken, createRefreshToken } from "../utils/JTW.js";
+import { CustomPayload, isCustomPayload } from "../types/jwt.js";
+import { createAccessToken, createRefreshToken, verifyToken } from "../utils/JTW.js";
 import asyncWrapper from "../utils/AsyncWrapper.js";
 import User from "../models/UserModel.js";
 import bcrypt from "bcrypt";
-import mongoose from "mongoose";
+import mongoose, { MongooseError } from "mongoose";
 export const Login = () => {};
 
 export const Register = async (req: Request, res: Response) => {
@@ -61,7 +61,7 @@ export const Register = async (req: Request, res: Response) => {
             { user: newUser.name, role: newUser.user_type },
             "user created successfully"
         );
-    } catch (error) {
+    } catch (error : any) {
         if (error.code === 11000) {
             Fail(res, 400, "duplicated user");
             return
@@ -70,46 +70,43 @@ export const Register = async (req: Request, res: Response) => {
     }
 };
 
-export const test = async (req: Request, res: Response) => {
-    console.log(req.body);
-
-    res.send(`req body is : ${JSON.stringify(req.body)}`);
-};
 export const refreshToken = (
     req: Request,
     res: Response,
-    next: NextFunction
 ) => {
     if (!req.cookies.refreshToken) {
-        return Error(res, 401, "Refresh token missing");
+        Error(res, 401, "Refresh token missing");
+        return 
     }
     if (!process.env.JWT_KEY) {
-        return Error(res, 400, "Authentication configuration error");
+        Error(res, 400, "Authentication configuration error");
+        return
     }
-
     try {
-        const buffer =new Buffer( req.cookies.refreshToken.split(".")[1],'base64')
-        const payload = buffer.toString("utf-8")
-        const decoded = jwt.verify(
-            req.cookies.refreshToken,
-            `${payload}${process.env.JWT_KEY}`
-        );
+        const decoded = verifyToken(req.cookies.refreshToken)
+        console.log('decoded refresh token : ',decoded)
         if (!isCustomPayload(decoded)) {
-            return Error(res, 401, "Invalid token payload");
+            Error(res, 401, "Invalid token payload");
+            return 
         }
-        createAccessToken(req, res, decoded);
-        const accessToken = createAccessToken(req, res, decoded);
+        const cleanPayload: CustomPayload = {
+            id: decoded.id,
+            role: decoded.role
+            
+        };
+        // createAccessToken(req, res, cleanPayload);
+        const accessToken = createAccessToken(req, res, cleanPayload);
         res.cookie("accessToken", accessToken, {
             httpOnly: true,
             expires: new Date(Date.now() + 900000),
         });
+        Success(res,200,null,'done')
     } catch (error) {
-        // Handle specific JWT errors
         const message =
             error instanceof jwt.TokenExpiredError
                 ? "Refresh token expired"
                 : "Invalid token";
-
-        return Error(res, 401, message);
+            console.log('Error refreshing the token : ',error)
+        Error(res, 401, message);
     }
 };

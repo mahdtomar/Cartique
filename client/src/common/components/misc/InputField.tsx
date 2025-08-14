@@ -7,6 +7,7 @@ const InputField = ({
     label,
     maxLength,
     error,
+    name
 }: {
     id: string;
     type: string;
@@ -16,6 +17,7 @@ const InputField = ({
     label?: string;
     maxLength?: number;
     error?: string;
+    name?:string
 }) => {
     if (type === "text-area") {
         return (

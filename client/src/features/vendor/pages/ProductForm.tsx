@@ -12,7 +12,8 @@ type formdataTypes = {
 	title: string;
 	briefDescription: string;
 	cost: string;
-	salePrice: string;
+	finalPrice: string;
+	basePrice:string;
 	discountPercentage: string;
 	category: string;
 	description: string;
@@ -72,11 +73,12 @@ const ProductForm = () => {
 			title,
 			briefDescription,
 			cost,
-			salePrice,
+			finalPrice:salePrice,
 			discountPercentage,
 			category,
 			description,
 			image,
+			basePrice,
 		};
 		const payload = new FormData();
 		for (const [key, value] of Object.entries(data)) {
@@ -88,6 +90,7 @@ const ProductForm = () => {
 			}
 		}
 		console.log(Object.entries(payload.entries()));
+
 		setLoading(true);
 		try {
 			const res = (await Request(
