@@ -11,7 +11,7 @@ const MainRouter = () => {
         <Routes>
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route element={<ProtectedRoutes role={'vendor'}></ProtectedRoutes>}>
+            <Route element={<ProtectedRoutes roles={['vendor']}></ProtectedRoutes>}>
                 <Route path="/vendor/*" element={<VendorRouter />} />
 
             </Route>

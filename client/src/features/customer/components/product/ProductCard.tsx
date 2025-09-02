@@ -1,4 +1,5 @@
 type productCardProps = {
+    id:string;
     img: string;
     title: string;
     price: number;
@@ -6,7 +7,25 @@ type productCardProps = {
     finalPrice: number;
     discountType: "fixed" | "percentage";
 };
+// {
+//         _id: this._id,
+//         title: this.title,
+//         description: this.description,
+//         briefDescription: this.briefDescription,
+//         basePrice: this.basePrice,
+//         discountPercentage: this.discountPercentage,
+//         finalPrice: this.finalPrice,
+//         image: this.image,
+//         cloudinary_url: this.cloudinary_url,
+//         rating: this.rating,
+//         ratingCount: this.ratingCount,
+//         totalRating: this.totalRating,
+//         category: this.category,
+//         createdAt: this.createdAt,
+//         updatedAt: this.updatedAt,
+//     };
 const ProductCard = ({
+    id,
     img,
     title,
     price,
@@ -29,7 +48,7 @@ const ProductCard = ({
                     <span>{price}</span>
                 </div>
                 <p>
-                    {finalPrice} <span className="uppercase">usd</span>
+                    {finalPrice} <span className="uppercase">EGP</span>
                 </p>
             </div>
             <button className="primary">Add To Cart</button>

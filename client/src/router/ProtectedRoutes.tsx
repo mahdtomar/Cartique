@@ -5,13 +5,15 @@ import { useNavigate, Outlet } from "react-router-dom"
 
 const ProtectedRoutes = ({ roles }: { roles: Role[] }) => {
     const user = useContext(UserContext)?.user
-
+    if (!user) {
+        return <div> unauthorized entry</div>
+    }
     if (!roles) {
         return <Outlet />
     }
     return (
         <div>
-            {roles.includes(user.role) ? <Outlet /> : <div> unauthorized entry</div>}
+            {roles.includes(user.role as Role) ? <Outlet /> : <div> unauthorized entry</div>}
         </div>
     )
 }
