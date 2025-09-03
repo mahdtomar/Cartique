@@ -41,7 +41,7 @@ const Request: RequestFunction = async (
     refresh = true
     const response = await axios(config);
     console.log(refresh)
-    return response;
+    return response.data;
   } catch (error) {
     console.error("Request failed:", error);
     throw error;

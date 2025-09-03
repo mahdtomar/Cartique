@@ -17,3 +17,12 @@ export const AddProduct = asyncWrapper(async (req: Request, res: Response) => {
         "this is the body"
     );
 });
+
+export const getAllProducts = asyncWrapper(async(req,res)=>{
+    const page = Number(req.query.page)
+    const limit = Number(req.query.limit)
+    const products = await Product.find().skip(page * limit).limit(limit)
+    const publicProducts = products.map(product=>product.toPublicJSON())
+    Success(res,200,publicProducts,'page and limit')
+
+})

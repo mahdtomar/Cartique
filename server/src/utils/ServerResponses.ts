@@ -6,7 +6,7 @@ export const Success = (
     data: any,
     message: string | undefined
 ) => {
-    return res.status(statusCode).send({ data, message });
+    return res.status(statusCode).send({ data, message,status:statusCode });
 };
 export const Fail = (
     res: Response,
