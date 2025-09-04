@@ -1,10 +1,11 @@
 import { UserContext } from "@/common/context/UserProvider"
-import type { Role, User } from "@/types/User"
-import { useContext, useState } from "react"
-import { useNavigate, Outlet } from "react-router-dom"
+import type { Role } from "@/types/User"
+import { useContext } from "react"
+import { Outlet } from "react-router-dom"
 
 const ProtectedRoutes = ({ roles }: { roles: Role[] }) => {
     const user = useContext(UserContext)?.user
+    console.log(user?.role)
     if (!user) {
         return <div> unauthorized entry</div>
     }

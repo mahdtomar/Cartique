@@ -147,6 +147,7 @@ export const refreshToken = (
             httpOnly: true,
             expires: new Date(Date.now() + (1000 * 60 * 5)),
         });
+        Success(res,201,{access:accessToken},'token refreshed')
     } catch (error) {
         const message =
             error instanceof jwt.TokenExpiredError

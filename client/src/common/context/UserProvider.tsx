@@ -34,7 +34,7 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
         try {
             const res = await Request("/auth/getUser", "GET", true);
             if (res.status === 200) {
-                const fetchedUser = res.data.data as User;
+                const fetchedUser = res.data as User;
                 if (fetchedUser.id !== user?.id) {
                     setUser(fetchedUser);
                 }
