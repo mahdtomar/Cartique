@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
-import Request from "../api/axios";
+import { useNavigate } from "react-router-dom";
+import { useFetch } from "../hooks/useFetch";
 
 type User = { name: string; role: string; id: string };
 
@@ -14,6 +15,7 @@ export const UserContext = createContext<ContextType | undefined>(undefined);
 const CACHE_DURATION = 5 * 60 * 1000;
 
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
+    const { Request } = useFetch()
     const [user, setUser] = useState<User | undefined>(() => {
         const storedUser = sessionStorage.getItem("user");
         return storedUser ? JSON.parse(storedUser) : undefined;
@@ -66,5 +68,8 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
         </UserContext.Provider>
     );
 };
-
+export const NavigateToLogin = () => {
+    const navigate = useNavigate()
+    navigate("/login")
+}
 export default UserProvider;

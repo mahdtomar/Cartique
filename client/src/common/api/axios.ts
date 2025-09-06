@@ -1,5 +1,6 @@
 import axios from "axios";
 import type { AxiosRequestConfig, AxiosResponse, AxiosError, Method, RawAxiosResponseHeaders, AxiosResponseHeaders } from "axios"
+import { NavigateToLogin } from "../context/UserProvider";
 // Define response type with generic for data
 // Improved ApiResponse interface without 'any'
 interface ApiResponse<T = unknown> {
@@ -70,6 +71,7 @@ axios.interceptors.response.use(
         return axios(config);
       } catch (refreshError) {
         console.error("Token refresh failed:", refreshError);
+        NavigateToLogin()
         throw refreshError;
       }
     }
