@@ -25,7 +25,7 @@ const ProductCard = ({
         <div className="border rounded flex flex-col gap-2 p-2 w-[160px] sm:w-[200px] lg:[238px] hover:shadow">
             <div className="flex-1  flex flex-col justify-between gap-2" onClick={() => navigate(`/product/${id}`)}>
                 <div className="aspect-[218/233] overflow-hidden rounded">
-                    <img className="object-fill block" src={img} alt={title} />
+                    <img className="object-fill block" src={img} alt={title} loading="lazy" />
                 </div>
                 <p className="line-clamp-3">{title}</p>
                 <div className="price flex gap-1">

@@ -9,6 +9,8 @@ import AuthRouter from "./routes/AuthRoutes.js";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import ProductRouter from "./routes/ProductsRouter.js";
+import { createClient } from 'redis';
+
 const app = express();
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -45,6 +47,27 @@ async function connectToDB() {
 }
 
 connectToDB().catch((err) => console.error("Connection error:", err));
+
+const redisClient = createClient({
+    username: 'default',
+    password: process.env.REDISPWD,
+    socket: {
+        host: 'redis-11229.crce176.me-central-1-1.ec2.redns.redis-cloud.com',
+        port: 11229
+    }
+});
+
+redisClient.on('error', err => console.log('Redis redisClient Error', err));
+
+await redisClient.connect();
+
+// redisClient.del("products?limit=20&page=0")
+// await redisClient.del('foo', 'bar');
+// const result = await redisClient.get('foo');
+// console.log(result)  // >>> bar
+
+
+
 app.get("/", (req: Request, res: Response) => {
     res.send("Welcome to Cartique");
 });

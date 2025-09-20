@@ -28,7 +28,7 @@ type RequestFunction = <T = unknown>(
 
 
 
-const FetchContext = createContext({ Request: () => { } })
+const FetchContext = createContext<{ Request: RequestFunction }>({ Request })
 export const FetchProvider = ({ children }: { children: React.ReactNode }) => {
     // let refresh = false
     const refreshRef = useRef(false)

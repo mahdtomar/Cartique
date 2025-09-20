@@ -27,7 +27,7 @@ const Navbar = () => {
     //     }
     // };
     return (
-        <nav className="mt-6 mx-0">
+        <nav className="mx-0 sticky top-0 left-0 bg-white py-3 shadow">
             <div className="flex justify-between py-2 container capitalize">
                 <Logo />
                 <label
