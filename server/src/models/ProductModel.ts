@@ -105,6 +105,9 @@ const productShcema = new Mongoose.Schema<ProductDocument>(
     },
     { timestamps: true }
 );
+
+productShcema.index({ title: 'text' });
+
 // public version of the product to prevent leaking important data
 productShcema.methods.toPublicJSON = function () {
     return {

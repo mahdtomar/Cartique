@@ -1,6 +1,6 @@
 import Logo from "./Logo";
 import searchIcon from "./../../assets/icons/MagnifyingGlass.svg";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 import cartIcon from "./../../assets/icons/ShoppingCartSimple.svg";
@@ -26,6 +26,17 @@ const Navbar = () => {
     //         i18n.changeLanguage("ar");
     //     }
     // };
+
+    const [searchParams, setSearchParams] = useSearchParams();
+    const search = searchParams.get("search") || "";
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchParams((prev) => {
+            prev.set("search", e.target.value);
+            prev.set("page", "1"); // reset to first page when searching
+            return prev;
+        });
+    };
     return (
         <nav className="mx-0 sticky top-0 left-0 bg-white py-3 shadow">
             <div className="flex justify-between py-2 container capitalize">
@@ -43,7 +54,8 @@ const Navbar = () => {
                         type="text"
                         placeholder="Search"
                         className="block w-full focus:outline-0"
-                        id="navbar-search"
+                        value={search}
+                        onChange={handleChange}
                     />
                 </label>
                 <ul className="flex gap-7 items-center justify-between">

@@ -21,8 +21,9 @@ export interface Product {
 export interface StoreContextTypes {
     previousPage: string; 
     setPreviousPage: React.Dispatch<SetStateAction<string>>;
-    getProducts: () => void;
-    products: Product[];
+    getProducts: (pageNumber?: number, limit?: number, searchText?:string) => Promise<Product[]>;
+    // products: Product[];
     search: string;
-    searchProducts: (e:string) => void;
+    storePage:number;
+    productsCount:number;
 }
