@@ -4,6 +4,7 @@ import ProductCard from "../components/product/ProductCard"
 import type { Product } from "@/types/Store"
 import Request from "@/common/api/axios"
 import { useDebounce } from "@/common/hooks/useDebounce"
+import Pagination from "../components/store/pagination"
 
 const fetchProducts = async (
     page: number,
@@ -11,7 +12,7 @@ const fetchProducts = async (
     search: string
 ): Promise<Product[]> => {
     const res = await Request('/product/getAllProducts', 'GET', true, undefined, {
-        page: page - 1,
+        page: page,
         limit,
         searchText: search,
     })
@@ -63,6 +64,7 @@ const Store = () => {
                         ))
                 )}
             </div>
+            <Pagination />
         </div>
     )
 }

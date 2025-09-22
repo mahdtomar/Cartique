@@ -9,7 +9,6 @@ import { FetchProvider } from "./common/hooks/useFetch.tsx";
 // import LanguageProvider from "./customer/context/LanguageProvider.tsx";
 
 createRoot(document.getElementById("root")!).render(
-    <StrictMode>
         <BrowserRouter>
             <LanguageProvider>
                 <FetchProvider>
@@ -17,5 +16,4 @@ createRoot(document.getElementById("root")!).render(
                 </FetchProvider>
             </LanguageProvider>
         </BrowserRouter>
-    </StrictMode>
 );

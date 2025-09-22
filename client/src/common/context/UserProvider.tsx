@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useFetch } from "../hooks/useFetch";
+// import { useNavigate } from "react-router-dom";
+// import { useFetch } from "../hooks/useFetch";
 
 type User = { name: string; role: string; id: string };
 
@@ -15,7 +15,7 @@ export const UserContext = createContext<ContextType | undefined>(undefined);
 const CACHE_DURATION = 5 * 60 * 1000;
 
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
-    const { Request } = useFetch()
+    // const { Request } = useFetch()
     const [user, setUser] = useState<User | undefined>(() => {
         const storedUser = sessionStorage.getItem("user");
         return storedUser ? JSON.parse(storedUser) : undefined;
@@ -34,9 +34,14 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
         }
 
         try {
-            const res = await Request("/auth/getUser", "GET", true);
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/getUser`, {
+                method: "GET",
+                credentials: "include"
+            });
+            const data = await res.json()
+
             if (res.status === 200) {
-                const fetchedUser = res.data as User;
+                const fetchedUser = data as User;
                 if (fetchedUser.id !== user?.id) {
                     setUser(fetchedUser);
                 }
@@ -68,8 +73,8 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
         </UserContext.Provider>
     );
 };
-export const NavigateToLogin = () => {
-    const navigate = useNavigate()
+export const NavigateToLogin = (navigate: (e: string) => void) => {
+    // const navigate = useNavigate()
     navigate("/login")
 }
 export default UserProvider;

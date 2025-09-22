@@ -2,6 +2,7 @@ import axios from "axios";
 import type { AxiosRequestConfig, AxiosResponse, AxiosError, Method, RawAxiosResponseHeaders, AxiosResponseHeaders } from "axios"
 import { NavigateToLogin } from "../context/UserProvider";
 import { createContext, useCallback, useContext, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 // Define response type with generic for data
 // Improved ApiResponse interface without 'any'
 interface ApiResponse<T = unknown> {
@@ -32,6 +33,7 @@ const FetchContext = createContext<{ Request: RequestFunction }>({ Request })
 export const FetchProvider = ({ children }: { children: React.ReactNode }) => {
     // let refresh = false
     const refreshRef = useRef(false)
+    const navigate = useNavigate()
     const Request: RequestFunction = useCallback(async (
         url,
         method,
@@ -81,7 +83,7 @@ export const FetchProvider = ({ children }: { children: React.ReactNode }) => {
                     return axios(config);
                 } catch (refreshError) {
                     console.error("Token refresh failed:", refreshError);
-                    NavigateToLogin()
+                    NavigateToLogin(navigate)
                     throw refreshError;
                 }
             }

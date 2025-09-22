@@ -27,7 +27,7 @@ const StoreProvider = ({ children }: { children: React.ReactNode }) => {
   }, [page, productsLimit])
 
 
-  useEffect(() => { getProducts() }, [getProducts])
+  // useEffect(() => { getProducts() }, [getProducts])
   return (
     <StoreContext.Provider value={{
       previousPage,
