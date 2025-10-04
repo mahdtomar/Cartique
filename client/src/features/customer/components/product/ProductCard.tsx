@@ -43,7 +43,7 @@ const ProductCard = ({
                     </p>
                 </div>
             </div>
-            <button className="primary">Add To Cart</button>
+            <button className="primary" >Add To Cart</button>
         </div>
     );
 };

@@ -1,10 +1,11 @@
-import { useSearchParams } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import ProductCard from "../components/product/ProductCard"
 import type { Product } from "@/types/Store"
 import Request from "@/common/api/axios"
 import { useDebounce } from "@/common/hooks/useDebounce"
-import Pagination from "../components/store/pagination"
+import Pagination from "../components/store/Pagination"
+import Spinner from "@/common/components/misc/Spinner"
 
 const fetchProducts = async (
     page: number,
@@ -32,12 +33,19 @@ const Store = () => {
         placeholderData: keepPreviousData
     })
 
+    if (isLoading) {
+        return <Spinner />
+    }
+
     if (isError) {
         return (
             <h2>
                 {error instanceof Error
                     ? error.message
-                    : "Unexpected error, Please contact support"}
+                    : <>
+                        Unexpected error, Please contact support at <span className="text-blue-500 underline"><Link to="mailto:omarmahdyq@gmail.com">omarmahdyq@gmail.com</Link></span>
+                    </>
+                }
             </h2>
         )
     }
@@ -46,9 +54,7 @@ const Store = () => {
         <div className="container">
             <h1 className="text-4xl">Shop All Products</h1>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:flex lg:justify-between flex-wrap justify-items-center gap-4">
-                {isLoading ? (
-                    <h2>Loading...</h2>
-                ) : (
+                {(
                     products?.length === 0 ? <div className="text-center">sorry, no products found with the title <b>{search}</b></div>
                         : products?.map((product) => (
                             <ProductCard
@@ -64,7 +70,7 @@ const Store = () => {
                         ))
                 )}
             </div>
-            <Pagination />
+            <Pagination productsCount={productsCount} />
         </div>
     )
 }
