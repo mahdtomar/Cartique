@@ -1,12 +1,13 @@
 import Logo from "./Logo";
 import searchIcon from "./../../assets/icons/MagnifyingGlass.svg";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 import cartIcon from "./../../assets/icons/ShoppingCartSimple.svg";
 import { useTranslation } from "react-i18next";
 import { useContext } from "react";
 import { languageContext } from "../../context/LanguageProvider";
+import GlobalProductSearch from "@/common/components/navbar/GlobalProductSearch";
 const Navbar = () => {
     type NavLink = {
         url: string;
@@ -27,16 +28,16 @@ const Navbar = () => {
     //     }
     // };
 
-    const [searchParams, setSearchParams] = useSearchParams();
-    const search = searchParams.get("search") || "";
+    // const [searchParams, setSearchParams] = useSearchParams();
+    // const search = searchParams.get("search") || "";
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchParams((prev) => {
-            prev.set("search", e.target.value);
-            prev.set("page", "1"); // reset to first page when searching
-            return prev;
-        });
-    };
+    // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setSearchParams((prev) => {
+    //         prev.set("search", e.target.value);
+    //         prev.set("page", "1"); // reset to first page when searching
+    //         return prev;
+    //     });
+    // };
     return (
         <nav className="mx-0 sticky top-0 left-0 bg-white py-3 shadow">
             <div className="flex justify-between py-2 container capitalize">
@@ -48,15 +49,9 @@ const Navbar = () => {
                     <img
                         src={searchIcon}
                         alt="Magnifying Glass icon"
-                        className="w-6"
+                        className="w-6 self-start"
                     />
-                    <input
-                        type="text"
-                        placeholder="Search"
-                        className="block w-full focus:outline-0"
-                        value={search}
-                        onChange={handleChange}
-                    />
+                    <GlobalProductSearch />
                 </label>
                 <ul className="flex gap-7 items-center justify-between">
                     {links.map((link) => (
