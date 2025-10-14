@@ -4,7 +4,7 @@ export const Success = (
     res: Response,
     statusCode: number,
     data: any,
-    message: string | undefined
+    message?: string | undefined
 ) => {
     return res.status(statusCode).send({ data, message,status:statusCode });
 };

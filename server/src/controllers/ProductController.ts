@@ -117,3 +117,35 @@ export const getProduct = asyncWrapper(async (req, res) => {
       : Fail(res, 500, "unknown Error");
   }
 });
+/**
+ *
+ */
+export const getProductSuggestion = asyncWrapper(async (req, res) => {
+  const search = typeof req.query.search === "string" ? req.query.search : "";
+
+  const cacheKey = `products-suggestions-${search.toLowerCase()}`;
+  const cachedData = await redisClient.get(cacheKey);
+  if (cachedData) {
+    Success(res, 200, JSON.parse(cachedData));
+    return;
+  }
+
+  let products = await Product.find(
+    { $text: { $search: search } },
+    { score: { $meta: "textScore" }, title: 1 }
+  )
+    .sort({ score: { $meta: "textScore" } })
+    .limit(5);
+
+  if (!products.length) {
+    products = await Product.find(
+      { title: { $regex: search, $options: "i" } },
+      { title: 1 }
+    ).limit(5);
+  }
+
+  await redisClient.set(cacheKey, JSON.stringify(products), {
+    EX: 60,
+  });
+  Success(res, 200, products, "search suggestions");
+});
