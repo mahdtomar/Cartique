@@ -6,6 +6,7 @@ import {
   getProduct,
   getProductCount,
   getProductSuggestion,
+  getRelatedProducts,
 } from "../controllers/ProductController.js";
 import { upload } from "../middlewares/multer.js";
 import { uploadImage } from "../utils/UploadImage.js";
@@ -20,9 +21,11 @@ ProductRouter.post(
   uploadImage,
   AddProduct
 );
+
 // ProductRouter.post("/add" , checkToken,  AddProduct);
 ProductRouter.get("/getAllProducts", getAllProducts);
 ProductRouter.get("/getProductsCount", getProductCount);
 ProductRouter.get("/suggestions", getProductSuggestion);
+ProductRouter.get("/category", getRelatedProducts);
 ProductRouter.get("/:id", getProduct);
 export default ProductRouter;

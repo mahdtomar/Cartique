@@ -118,7 +118,8 @@ export const getProduct = asyncWrapper(async (req, res) => {
   }
 });
 /**
- *
+ * recieves a string from frontend and query the products by title and return matching products titles with max length of 5 products
+ * @returns array { _id: string, title:string}[]
  */
 export const getProductSuggestion = asyncWrapper(async (req, res) => {
   const search = typeof req.query.search === "string" ? req.query.search : "";
@@ -148,4 +149,22 @@ export const getProductSuggestion = asyncWrapper(async (req, res) => {
     EX: 60,
   });
   Success(res, 200, products, "search suggestions");
+});
+
+export const getRelatedProducts = asyncWrapper(async (req, res) => {
+  const { category,productId } = req.query;
+  const cacheKey = `related-products-${category}`;
+  const cacheData = await redisClient.get(cacheKey);
+  if (cacheData) {
+    Success(res, 200,  JSON.parse(cacheData), `related products for category : ${category}`);
+    return;
+  }
+  const Products = await Product.find({
+    category,
+    _id: { $ne: productId },
+  }).limit(10);
+  await redisClient.set(cacheKey, JSON.stringify(Products), {
+    EX: 60,
+  });
+  Success(res, 200, Products, `related products for category : ${category}`);
 });
