@@ -17,7 +17,7 @@ type RequestFunction = <T = unknown>(
   method: Method,
   withCredentials: boolean,
   headers?: Record<string, string>,
-  params?: Record<string, string | number | boolean>,
+  params?: Record<string, string | number | boolean | T>,
   data?: unknown
 ) => Promise<ApiResponse<T>>;
 

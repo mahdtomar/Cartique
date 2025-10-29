@@ -1,8 +1,7 @@
+import type { User } from "@/types/User";
 import React, { createContext, useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // import { useFetch } from "../hooks/useFetch";
-
-type User = { name: string; role: string; id: string };
 
 type ContextType = {
     user: User | undefined;
@@ -41,7 +40,8 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
             const data = await res.json()
 
             if (res.status === 200) {
-                const fetchedUser = data as User;
+                console.log(res, data)
+                const fetchedUser = data.data as User;
                 if (fetchedUser.id !== user?.id) {
                     setUser(fetchedUser);
                 }

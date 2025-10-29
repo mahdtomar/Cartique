@@ -6,6 +6,7 @@ import type { Product } from "@/types/Store"
 import { AxiosError } from "axios"
 import Spinner from "@/common/components/misc/Spinner"
 import RelatedProducts from "../components/product/RelatedProducts"
+import ReviewsSection from "../components/product/ReviewsSection"
 
 const ProductPage = () => {
     const { proudctId } = useParams()
@@ -49,9 +50,10 @@ const ProductPage = () => {
     }
 
     return (
-        <div className="flex flex-col items-stretch">
+        <div className="flex flex-col items-stretch gap-10">
             <Header product={product} />
-            <RelatedProducts category={product.category} productId={product._id}/>
+            <RelatedProducts category={product.category} productId={product._id} />
+            <ReviewsSection />
         </div>
     )
 }

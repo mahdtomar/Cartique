@@ -36,8 +36,8 @@ const RelatedProducts = ({ category, productId }: { category: string, productId:
         )
     }
     return (
-        <div className="container">
-            <h2>Related Products</h2>
+        <div className="container flex flex-col justify-center items-stretch gap-2">
+            <h2 className="text-2xl text-center">Related Products</h2>
             <div className="slider overflow-x-auto scroll-smooth snap-x snap-mandatory">
                 <div className="flex gap-4 w-max flex-nowrap">
                     {products.map((product) => (
@@ -54,6 +54,9 @@ const RelatedProducts = ({ category, productId }: { category: string, productId:
                         </div>
                     ))}
                 </div>
+            </div>
+            <div className="flex justify-center w-full">
+                <button className="primary">View More</button>
             </div>
         </div>
     )
