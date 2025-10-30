@@ -12,7 +12,7 @@ const fetchProducts = async (
     limit: number,
     search: string
 ): Promise<Product[]> => {
-    const res = await Request('/products/getAllProducts', 'GET', true, undefined, {
+    const res = await Request<Product[]>('/products/getAllProducts', 'GET', true, undefined, {
         page: page,
         limit,
         searchText: search,

@@ -12,7 +12,9 @@ const CommentInputCard = ({ productId }: { productId: string }) => {
     const user = useContext(UserContext)?.user
     const [review, setReview] = useState("")
     const [rating, setRating] = useState(0)
+    const [isPosting, setIsPosting] = useState(false)
     const submit = async () => {
+        setIsPosting(true)
         try {
             if (rating === 0 || !review.trim()) {
                 toast.error("Please add a rating and a review before submitting.")
@@ -28,8 +30,11 @@ const CommentInputCard = ({ productId }: { productId: string }) => {
             await queryClient.refetchQueries({
                 queryKey: ['product', 'comments', productId],
             })
+            setIsPosting(false)
             return res
         } catch (error) {
+            setIsPosting(false)
+            toast.error("Failed to post review")
             console.log(error)
         }
     }
@@ -45,7 +50,7 @@ const CommentInputCard = ({ productId }: { productId: string }) => {
                     <p className="font-bold">{user?.name || 'guest'}</p>
                     <RatingPicker onChange={setRating} />
                 </div>
-                <button className="primary" onClick={submit}>post</button>
+                <button className="primary" onClick={submit} disabled={isPosting}>{isPosting ? "Pending..." : "Post"}</button>
             </div>
             <textarea name="review" value={review} onChange={e => setReview(e.target.value)} id="user-review" className='resize-none bg-white shadow rounded-md border border-gray-100 focus:outline-0 p-2' rows={3}></textarea>
         </div>
