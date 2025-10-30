@@ -10,6 +10,7 @@ import {
 } from "../controllers/ProductController.js";
 import { upload } from "../middlewares/multer.js";
 import { uploadImage } from "../utils/UploadImage.js";
+import { getProductComments } from "../controllers/CommentController.js";
 // import {checkToken} from './../middlewares/CheckToken.js'
 
 const ProductRouter = express.Router();
@@ -27,5 +28,6 @@ ProductRouter.get("/getAllProducts", getAllProducts);
 ProductRouter.get("/getProductsCount", getProductCount);
 ProductRouter.get("/suggestions", getProductSuggestion);
 ProductRouter.get("/category", getRelatedProducts);
+ProductRouter.get("/:productId/comments", getProductComments);
 ProductRouter.get("/:id", getProduct);
 export default ProductRouter;

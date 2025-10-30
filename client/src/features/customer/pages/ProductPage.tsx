@@ -13,7 +13,7 @@ const ProductPage = () => {
 
     const getProduct = async (): Promise<Product | undefined> => {
         try {
-            const res = await Request<Product>(`/product/${proudctId}`, "GET", false)
+            const res = await Request<Product>(`/products/${proudctId}`, "GET", false)
             return res.data
         } catch (error) {
             if (error instanceof AxiosError && error.response?.data?.message) {
@@ -53,7 +53,7 @@ const ProductPage = () => {
         <div className="flex flex-col items-stretch gap-10">
             <Header product={product} />
             <RelatedProducts category={product.category} productId={product._id} />
-            <ReviewsSection />
+            <ReviewsSection productId={product._id}/>
         </div>
     )
 }

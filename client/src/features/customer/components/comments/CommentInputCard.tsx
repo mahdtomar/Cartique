@@ -4,17 +4,34 @@ import { UserContext } from '@/common/context/UserProvider'
 import { RatingPicker } from '@/common/components/misc/RatingPicker'
 import Request from '@/common/api/axios'
 import { Link } from 'react-router-dom'
+import { toast } from 'sonner'
+import { useQueryClient } from '@tanstack/react-query'
 
 const CommentInputCard = ({ productId }: { productId: string }) => {
+    const queryClient = useQueryClient()
     const user = useContext(UserContext)?.user
-    const [review, setReview] = useState(``)
+    const [review, setReview] = useState("")
     const [rating, setRating] = useState(0)
     const submit = async () => {
-        if (!user) {
-            return
+        try {
+            if (rating === 0 || !review.trim()) {
+                toast.error("Please add a rating and a review before submitting.")
+                return
+            }
+            if (!user) {
+                return
+            }
+            const res = await Request("/comments/add", "POST", true, undefined, undefined, {
+                productId, rating, review
+            })
+            toast.success("review posted")
+            await queryClient.refetchQueries({
+                queryKey: ['product', 'comments', productId],
+            })
+            return res
+        } catch (error) {
+            console.log(error)
         }
-        const res = await Request("/comments/post", "POST", true, undefined, { user, productId, rating })
-        console.log(res)
     }
     return (
         <div className="flex flex-col items-stretch gap-4 bg-[#FAFAFA] p-4 rounded relative">

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom"
 const RelatedProducts = ({ category, productId }: { category: string, productId: string }) => {
 
     const fetchRelatedProducts = async () => {
-        const res = await Request("/product/category", "GET", true, undefined, { category, productId })
+        const res = await Request("/products/category", "GET", true, undefined, { category, productId })
         return res.data as Product[]
     }
 

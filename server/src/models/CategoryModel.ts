@@ -9,7 +9,7 @@ const schema = new mongoose.Schema<Category>({
     required: true,
     unique: true,
   },
-});
+}); 
 
 const Category = mongoose.model("Category", schema);
 export default Category;

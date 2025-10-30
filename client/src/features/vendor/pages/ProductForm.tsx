@@ -94,7 +94,7 @@ const ProductForm = () => {
 		setLoading(true);
 		try {
 			const res = (await Request(
-				"/product/add",
+				"/products/add",
 				"POST",
 				true,
 				undefined,

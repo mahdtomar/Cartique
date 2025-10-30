@@ -1,6 +1,6 @@
 import Request from "@/common/api/axios"
 import type { Product, StoreContextTypes } from "@/types/Store"
-import React, { createContext, useCallback, useEffect, useState } from "react"
+import React, { createContext, useCallback, useState } from "react"
 import { useSearchParams } from "react-router-dom";
 
 export const StoreContext = createContext<StoreContextTypes>({
@@ -22,7 +22,7 @@ const StoreProvider = ({ children }: { children: React.ReactNode }) => {
   const productsLimit = Number(searchParams.get("limit")) || 20;
 
   const getProducts = useCallback(async (pageNumber: number = Math.max(page && +page || 1, 1), limit: number = productsLimit, searchText: string = ''): Promise<Product[]> => {
-    const res = await Request('/product/getAllProducts', 'GET', true, undefined, { page: pageNumber - 1, limit, searchText })
+    const res = await Request<Product[]>('/products/getAllProducts', 'GET', true, undefined, { page: pageNumber - 1, limit, searchText })
     return res.data as Product[]
   }, [page, productsLimit])
 

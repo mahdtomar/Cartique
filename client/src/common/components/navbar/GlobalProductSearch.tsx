@@ -25,7 +25,7 @@ const GlobalProductSearch = () => {
 
     const fetchSuggestions = useCallback(async (): Promise<SuggestedProductsType[]> => {
         if (debouncedSearch) {
-            const res = await Request<SuggestedProductsType[]>(`/product/suggestions?search=${debouncedSearch}`, "GET", false);
+            const res = await Request<SuggestedProductsType[]>(`/products/suggestions?search=${debouncedSearch}`, "GET", false);
             console.log(res.data);
             return res.data;
         }

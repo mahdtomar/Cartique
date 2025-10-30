@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import  Mongoose from "mongoose";
 
 const customMinbasePrice : [ (val:number) => boolean, string ] = [
     function (val : number) {
@@ -31,10 +30,10 @@ type Product = {
     totalRating:number;
     cloudinary_url:string;
 }
-interface ProductDocument extends Product, Mongoose.Document {
+interface ProductDocument extends Product, mongoose.Document {
   toPublicJSON: () => any; 
 }
-const productShcema = new Mongoose.Schema<ProductDocument>(
+const productShcema = new mongoose.Schema<ProductDocument>(
     {
         title: {
             type: String,
