@@ -10,7 +10,7 @@ const Pagination = ({ productsCount }: { productsCount: number }) => {
     const { Request } = useFetch()
     const [searchParams, setSearchParams] = useSearchParams();
     const fetchProductCount = async () => {
-        const res = await Request<ProductCount>("/product/getProductsCount", "GET", false)
+        const res = await Request<ProductCount>("/products/getProductsCount", "GET", false)
         return res.data
     }
 

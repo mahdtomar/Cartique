@@ -9,7 +9,7 @@ const Header = ({ product }: { product: Product }) => {
             <div className="container flex max-h-[450px]">
                 <div className="wrapper w-full flex flex-col items-stretch justify-between">
                     <div>
-                        <h1 className="text-4xl mb-4 line-clamp-3">{product.title}</h1>
+                        <h1 className="text-4xl/12 mb-4 line-clamp-3">{product.title}</h1>
                         <p className="w-full line-clamp-5">{product.briefDescription}</p>
                     </div>
                     <div className="flex flex-col items-stretch gap-4 w-fit">
