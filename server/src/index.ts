@@ -11,6 +11,7 @@ import cookieParser from "cookie-parser";
 import ProductRouter from "./routes/ProductsRouter.js";
 import { createClient } from 'redis';
 import commentsRouter from "./routes/CommentsRouter.js";
+import cartRouter from "./routes/CartRouter.js";
 
 const app = express();
 app.use(cookieParser());
@@ -32,6 +33,7 @@ app.use(
 app.use("/auth", AuthRouter);
 app.use("/products", ProductRouter);
 app.use("/comments", commentsRouter);
+app.use("/cart", cartRouter);
 async function connectToDB() {
     try {
         if (!DB_URI) {

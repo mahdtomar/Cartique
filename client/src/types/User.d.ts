@@ -1,10 +1,15 @@
-export type Role = 'admin' | 'vendor' ; 
+export type Role = "admin" | "vendor";
 
-export type User = { name: string; role: Role; id: string,image?:string };
+export type User = { name: string; role: Role; id: string; image?: string };
 
 export type UserContextType = {
-    user: User | undefined;
-    isLogged: boolean;
-    fetchUser: (force?: boolean) => void;
-    error:{type:string;message:string;code?:number}
+  user: User | undefined;
+  isLogged: boolean;
+  fetchUser: (force?: boolean) => void;
+  error: { type: string; message: string; code?: number };
 };
+
+export interface CartItem {
+  product_id: Types.ObjectId;
+  count: number;
+}

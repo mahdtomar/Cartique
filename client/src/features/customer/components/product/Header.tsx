@@ -1,9 +1,20 @@
 import { Rating } from "@/common/components/misc/Rating"
 import type { Product } from "@/types/Store"
 import HeartIcon from "../../assets/icon-components/HeartIcon"
+import Request from "@/common/api/axios"
+import { useQueryClient } from "@tanstack/react-query"
+import { useContext } from "react"
+import { UserContext } from "@/common/context/UserProvider"
 const Header = ({ product }: { product: Product }) => {
     const discountType = 'fixed'
-
+    const userId = useContext(UserContext)?.user?.id
+    const queryClient = useQueryClient()
+    const addToCart = async () => {
+        const res = await Request("/cart/", "POST", true, undefined, undefined, { productId: product._id })
+        console.log(res)
+        console.log(res.data)
+        queryClient.invalidateQueries({ queryKey: ["cart", userId] })
+    }
     return (
         <header className="mt-5">
             <div className="container flex max-h-[450px]">
@@ -31,7 +42,7 @@ const Header = ({ product }: { product: Product }) => {
                             <Rating totalRating={product.totalRating} ratingCount={product.ratingCount} />
                         </div>
                         <div className="flex gap-4 items-center h-[75px]">
-                            <button className="primary h-full px-25 text-2xl w-65">Add To Cart</button>
+                            <button onClick={addToCart} className="primary h-full px-25 text-2xl w-65">Add To Cart</button>
                             <button className="shadow rounded border border-gray-200 h-full grid place-items-center pointer p-2 aspect-square">
                                 <HeartIcon className="pointer" />
                             </button>

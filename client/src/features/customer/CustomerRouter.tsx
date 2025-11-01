@@ -4,6 +4,7 @@ import CustomerLayout from "@/layout/CustomerLayout";
 import Store from "./pages/Store";
 import StoreProvider from "./context/StoreProvider";
 import ProductPage from "./pages/ProductPage";
+import CartProvider from "./context/CartProvider";
 // import CustomerLayout from "../layout/CustomerLayout";
 
 const CustomerRouter = () => {
@@ -12,7 +13,9 @@ const CustomerRouter = () => {
             <Route element={<CustomerLayout />}>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="store" element={<StoreProvider><Store /></StoreProvider>} />
-                <Route path="product/:proudctId" element={<ProductPage />} />
+                <Route element={<CartProvider></CartProvider>}>
+                    <Route path="product/:proudctId" element={<ProductPage />} />
+                </Route>
             </Route>
         </Routes>
     );
