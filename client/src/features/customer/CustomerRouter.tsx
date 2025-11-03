@@ -5,6 +5,7 @@ import Store from "./pages/Store";
 import StoreProvider from "./context/StoreProvider";
 import ProductPage from "./pages/ProductPage";
 import CartProvider from "./context/CartProvider";
+import CartPage from "./pages/CartPage";
 // import CustomerLayout from "../layout/CustomerLayout";
 
 const CustomerRouter = () => {
@@ -15,6 +16,7 @@ const CustomerRouter = () => {
                 <Route path="store" element={<StoreProvider><Store /></StoreProvider>} />
                 <Route element={<CartProvider></CartProvider>}>
                     <Route path="product/:proudctId" element={<ProductPage />} />
+                    <Route path="cart" element={<CartPage />} />
                 </Route>
             </Route>
         </Routes>

@@ -17,6 +17,23 @@ export interface Product {
   createdAt: string;
   updatedAt: string;
 }
+type CartProduct = Pick<
+  Product,
+  | "_id"
+  | "title"
+  | "description"
+  | "briefDescription"
+  | "basePrice"
+  | "discountPercentage"
+  | "finalPrice"
+  | "cloudinary_url"
+>;
+
+export interface CartItemType {
+  _id: string;
+  count: number;
+  product: CartProduct;
+}
 export interface Comment {
   _id: string;
   user: {

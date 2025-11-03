@@ -1,7 +1,7 @@
 import Mongoose, { Types, Model, Document } from "mongoose";
 import { Role, VALID_ROLES } from "../types/jwt.js";
 interface CartItem {
-  product_id: Types.ObjectId;
+  product: Types.ObjectId;
   count: number;
 }
 interface IUser extends Document {
@@ -39,7 +39,7 @@ const schema = new Mongoose.Schema<IUser>({
   avatar: String,
   cart: [
     {
-      product_id: { type: Types.ObjectId, ref: "Product", required: true },
+      product: { type: Types.ObjectId, ref: "Product", required: true },
       count: { type: Number, required: true, min: 1 },
     },
   ],

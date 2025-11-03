@@ -9,7 +9,3 @@ export type UserContextType = {
   error: { type: string; message: string; code?: number };
 };
 
-export interface CartItem {
-  product_id: Types.ObjectId;
-  count: number;
-}
