@@ -35,6 +35,9 @@ const RelatedProducts = ({ category, productId }: { category: string, productId:
             </h2>
         )
     }
+    if (products.length === 0) {
+        return
+    }
     return (
         <div className="container flex flex-col justify-center items-stretch gap-2">
             <h2 className="text-2xl text-center">Related Products</h2>

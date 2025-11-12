@@ -1,9 +1,22 @@
 import Counter from "@/common/components/misc/Counter"
+import { useDebounce } from "@/common/hooks/useDebounce"
 import type { CartItemType } from "@/types/Store"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useCart } from "../../context/CartProvider"
 
 const CartItem = ({ item }: { item: CartItemType }) => {
     const [count, setCount] = useState(item.count)
+    const { updateCart } = useCart()
+    const debouncedCount = useDebounce(count, 300)
+
+    useEffect(() => {
+        if (debouncedCount !== item.count) {
+            updateCart(item.product._id, debouncedCount)
+        }
+    }, [debouncedCount])
+    const increment = () => setCount(prev => prev + 1)
+    const decrement = () => setCount(prev => Math.max(1, prev - 1))
+
     const discountType = "fixed"
     return (
         <div className="border rounded p-2 flex gap-4 h-[260px]">
@@ -31,7 +44,7 @@ const CartItem = ({ item }: { item: CartItemType }) => {
                         </p>
                     </div>
                     <div className="flex justify-between">
-                        <Counter value={count} setValue={setCount} min={1} className="min-w-26 justify-between" />
+                        <Counter value={count} increment={increment} decrement={decrement} min={1} className="min-w-26 justify-between" />
                         <button className="primary">Product Details</button>
                     </div>
                 </div>

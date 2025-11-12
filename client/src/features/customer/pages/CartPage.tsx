@@ -22,7 +22,7 @@ const CartPage = () => {
   }
   return (
     <div className="container">
-      {cartItems.map(cartItem => <CartItem item={cartItem} />)}
+      {cartItems.map(cartItem => <CartItem key={cartItem._id} item={cartItem} />)}
     </div>
   )
 }

@@ -36,5 +36,29 @@ export const addToCart = asyncWrapper(async (req, res) => {
   Fail(res, 409, "Product already exists");
 });
 
-export const updateCartItem = asyncWrapper(async (req, res) => {});
+export const updateCartItem = asyncWrapper(async (req, res) => {
+  const { productId, count } = req.query;
+  const userId = req.user?.id;
+  if (!userId) {
+    Fail(res, 401, "Authentication Error.");
+    return;
+  }
+  const user = await User.findById(userId);
+  if (!user) {
+    Fail(res, 400, "user not found");
+    return;
+  }
+  let targetItem = user.cart.find((item) => String(item.product) === productId);
+  if (!targetItem) {
+    Fail(res, 400, "can not find cart item");
+    return;
+  }
+  targetItem.count = Number(count);
+  user.cart = user.cart.map((cartItem) =>
+    String(cartItem.product) === productId ? targetItem : cartItem
+  );
+  await user.save();
+
+  Success(res,201,user.cart,'updated userCart')
+});
 export const removeFromCart = asyncWrapper(async (req, res) => {});
