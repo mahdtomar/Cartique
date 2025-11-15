@@ -22,7 +22,7 @@ const ProductCard = ({
 }: productCardProps) => {
     const navigate = useNavigate()
     return (
-        <div className="border rounded flex flex-col gap-2 p-2 w-full sm:w-[200px] md:w-[200px] lg:w-[220px] hover:shadow">
+        <div className="border rounded flex flex-col gap-2 p-2 w-full sm:w-[200px] md:w-[200px] lg:w-[210px] hover:shadow">
             <div className="flex-1  flex flex-col justify-between gap-2" onClick={() => navigate(`/product/${id}`)}>
                 <div className="aspect-[218/233] overflow-hidden rounded">
                     <img className="object-fill block" src={img} alt={title} loading="lazy" />

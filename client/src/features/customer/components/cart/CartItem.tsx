@@ -6,7 +6,7 @@ import { useCart } from "../../context/CartProvider"
 
 const CartItem = ({ item }: { item: CartItemType }) => {
     const [count, setCount] = useState(item.count)
-    const { updateCart } = useCart()
+    const { updateCart, removeItem } = useCart()
     const debouncedCount = useDebounce(count, 300)
 
     useEffect(() => {
@@ -44,7 +44,10 @@ const CartItem = ({ item }: { item: CartItemType }) => {
                         </p>
                     </div>
                     <div className="flex justify-between">
-                        <Counter value={count} increment={increment} decrement={decrement} min={1} className="min-w-26 justify-between" />
+                        <div className="flex gap-2">
+                            <Counter value={count} increment={increment} decrement={decrement} min={1} className="min-w-26 justify-between" />
+                            <button className="danger" onClick={() => removeItem(item._id)}>Delete</button>
+                        </div>
                         <button className="primary">Product Details</button>
                     </div>
                 </div>

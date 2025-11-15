@@ -6,7 +6,7 @@ const CustomerLayout = () => {
     return (
         <div className="flex flex-col min-h-screen">
             <Navbar />
-            <div className="content-wrapper flex-1">
+            <div className="content-wrapper flex-1 pt-2">
                 <Outlet />
             </div>
             {/* footer will go here */}

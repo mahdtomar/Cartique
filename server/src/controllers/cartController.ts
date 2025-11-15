@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import User from "../models/UserModel.js";
 import asyncWrapper from "../utils/AsyncWrapper.js";
 import { Fail, Success } from "../utils/ServerResponses.js";
@@ -59,6 +60,15 @@ export const updateCartItem = asyncWrapper(async (req, res) => {
   );
   await user.save();
 
-  Success(res,201,user.cart,'updated userCart')
+  Success(res, 201, user.cart, "updated userCart");
 });
-export const removeFromCart = asyncWrapper(async (req, res) => {});
+
+export const removeFromCart = asyncWrapper(async (req, res) => {
+  const cartItemId = req.params.cartItemId;
+  const userId = req.user?.id;
+  await User.updateOne(
+    { _id: userId },
+    { $pull: { cart: { _id: new mongoose.Types.ObjectId(cartItemId) } } }
+  );
+  Success(res, 200, { cartItemId }, "item removed");
+});

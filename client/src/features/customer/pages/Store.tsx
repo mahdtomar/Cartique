@@ -53,7 +53,7 @@ const Store = () => {
     return (
         <div className="container">
             <h1 className="text-4xl">Shop All Products</h1>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:flex lg:justify-between flex-wrap justify-items-center gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:flex lg:justify-center flex-wrap justify-items-center gap-4">
                 {(
                     products?.length === 0 ? <div className="text-center">sorry, no products found with the title <b>{search}</b></div>
                         : products?.map((product) => (

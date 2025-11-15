@@ -4,6 +4,7 @@ import Request from "../api/axios";
 import { UserContext } from "../context/UserProvider";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/features/customer/components/misc/Navbar";
+import axios from "axios";
 type loginErrors = {
   email?: string;
   password?: string
@@ -29,16 +30,6 @@ const Login = () => {
     } else if (!emailRegex.test(email)) {
       newErrors.email = "Invalid email format";
     }
-    // Password validation
-    if (!password) {
-      newErrors.password = "Password is required";
-    } else if (password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
-    } else if (!/[A-Z]/.test(password)) {
-      newErrors.password = "Password must contain an uppercase letter";
-    } else if (!/[0-9]/.test(password)) {
-      newErrors.password = "Password must contain a number";
-    }
     console.log('validation : ', newErrors)
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -48,12 +39,31 @@ const Login = () => {
     if (!validation()) {
       return
     }
-    const res = await Request("/auth/login", 'POST', true, undefined, undefined, { email, password });
-    if (fetchUser) {
-      fetchUser(true)
+    try {
+      const res = await Request(
+        "/auth/login",
+        "POST",
+        true,
+        undefined,
+        undefined,
+        { email, password }
+      );
+      console.log(res);
+
+      redirect();
+      fetchUser?.(true);
+
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        if (err.response?.status === 404) {
+          setErrors({ ...errors, email: err.response.data.message });
+        } else if (err.response?.status === 400) {
+          setErrors({ ...errors, password: err.response.data.message });
+        }
+      } else {
+        console.log("Unknown error", err);
+      }
     }
-    console.log(res)
-    redirect()
   }
   return (
     <>
