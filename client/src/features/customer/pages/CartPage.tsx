@@ -32,10 +32,10 @@ const CartPage = () => {
   }
   return (
     <div className="container flex gap-4 items-start pt-4">
+      <CartSummery />
       <div>
         {cartItems.map(cartItem => <CartItem key={cartItem._id} item={cartItem} />)}
       </div>
-      <CartSummery />
     </div>
   )
 }

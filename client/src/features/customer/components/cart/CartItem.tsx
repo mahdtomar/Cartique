@@ -3,12 +3,13 @@ import { useDebounce } from "@/common/hooks/useDebounce"
 import type { CartItemType } from "@/types/Store"
 import { useEffect, useState } from "react"
 import { useCart } from "../../context/CartProvider"
+import { useTranslation } from "react-i18next"
 
 const CartItem = ({ item }: { item: CartItemType }) => {
     const [count, setCount] = useState(item.count)
     const { updateCart, removeItem } = useCart()
     const debouncedCount = useDebounce(count, 300)
-
+    const { t } = useTranslation(['cart'])
     useEffect(() => {
         if (debouncedCount !== item.count) {
             updateCart(item.product._id, debouncedCount)
@@ -46,9 +47,9 @@ const CartItem = ({ item }: { item: CartItemType }) => {
                     <div className="flex justify-between">
                         <div className="flex gap-2">
                             <Counter value={count} increment={increment} decrement={decrement} min={1} className="min-w-26 justify-between" />
-                            <button className="danger" onClick={() => removeItem(item._id)}>Delete</button>
+                            <button className="danger" onClick={() => removeItem(item._id)}>{t("common:delete")}</button>
                         </div>
-                        <button className="primary">Product Details</button>
+                        <button className="primary">{t("productDetails")}</button>
                     </div>
                 </div>
             </div>

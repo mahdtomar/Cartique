@@ -6,6 +6,7 @@ import Spinner from "@/common/components/misc/Spinner"
 import { useContext } from "react"
 import { UserContext } from "@/common/context/UserProvider"
 import type { Comment } from "@/types/Store"
+import { useTranslation } from "react-i18next"
 
 const ReviewsSection = ({ productId }: { productId: string }) => {
     const getComments = async () => {
@@ -17,6 +18,8 @@ const ReviewsSection = ({ productId }: { productId: string }) => {
         queryKey: ['product', 'comments', productId],
         queryFn: getComments
     })
+    const { t } = useTranslation("productPage")
+
     if (isLoading) {
         return <Spinner className="w-15" />
     }
@@ -29,6 +32,8 @@ const ReviewsSection = ({ productId }: { productId: string }) => {
     }
     return (
         <div className="container flex flex-col items-stretch gap-2">
+            <h2 className="text-2xl text-center">{t("comments")}</h2>
+
             {userComment()}
             {comments?.filter((comment) => comment.user._id !== user?.id)
                 .map(comment => <CommentCard key={comment._id} comment={comment} />)}

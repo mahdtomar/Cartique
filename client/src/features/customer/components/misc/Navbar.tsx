@@ -59,7 +59,7 @@ const Navbar = () => {
                     ))}
                     <li>
                         <Link to={"/cart"}>
-                            <img src={cartIcon} alt="shopping cart" />
+                            <img src={cartIcon} alt="shopping cart" className="cursor-pointer" />
                         </Link>
                     </li>
                     <li>

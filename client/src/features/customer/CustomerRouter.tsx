@@ -6,6 +6,7 @@ import StoreProvider from "./context/StoreProvider";
 import ProductPage from "./pages/ProductPage";
 import CartProvider from "./context/CartProvider";
 import CartPage from "./pages/CartPage";
+import Checkout from "./pages/Checkout";
 // import CustomerLayout from "../layout/CustomerLayout";
 
 const CustomerRouter = () => {
@@ -18,6 +19,7 @@ const CustomerRouter = () => {
                     <Route path="product/:proudctId" element={<ProductPage />} />
                     <Route path="cart" element={<CartPage />} />
                 </Route>
+                <Route path="checkout" element={<Checkout />} />
             </Route>
         </Routes>
     );

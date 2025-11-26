@@ -5,10 +5,12 @@ import Request from "@/common/api/axios"
 import { useQueryClient } from "@tanstack/react-query"
 import { useContext } from "react"
 import { UserContext } from "@/common/context/UserProvider"
+import { useTranslation } from "react-i18next"
 const Header = ({ product }: { product: Product }) => {
     const discountType = 'fixed'
     const userId = useContext(UserContext)?.user?.id
     const queryClient = useQueryClient()
+    const { t } = useTranslation("productPage")
     const addToCart = async () => {
         const res = await Request("/cart/", "POST", true, undefined, undefined, { productId: product._id })
         console.log(res)
@@ -42,7 +44,7 @@ const Header = ({ product }: { product: Product }) => {
                             <Rating totalRating={product.totalRating} ratingCount={product.ratingCount} />
                         </div>
                         <div className="flex gap-4 items-center h-[75px]">
-                            <button onClick={addToCart} className="primary h-full px-25 text-2xl w-65">Add To Cart</button>
+                            <button onClick={addToCart} className="primary h-full px-25 text-2xl w-65">{t("addToCart")}</button>
                             <button className="shadow rounded border border-gray-200 h-full grid place-items-center pointer p-2 aspect-square">
                                 <HeartIcon className="pointer" />
                             </button>

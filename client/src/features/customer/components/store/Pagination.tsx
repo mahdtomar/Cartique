@@ -1,4 +1,5 @@
-import { useFetch } from "@/common/hooks/useFetch"
+// import { useFetch } from "@/common/hooks/useFetch"
+import Request from "@/common/api/axios";
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { useSearchParams } from "react-router-dom"
 
@@ -7,7 +8,7 @@ interface ProductCount {
 }
 
 const Pagination = ({ productsCount }: { productsCount: number }) => {
-    const { Request } = useFetch()
+    
     const [searchParams, setSearchParams] = useSearchParams();
     const fetchProductCount = async () => {
         const res = await Request<ProductCount>("/products/getProductsCount", "GET", false)
