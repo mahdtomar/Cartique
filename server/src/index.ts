@@ -12,6 +12,7 @@ import ProductRouter from "./routes/ProductsRouter.js";
 import { createClient } from "redis";
 import commentsRouter from "./routes/CommentsRouter.js";
 import cartRouter from "./routes/CartRouter.js";
+import languagesRouter from "./routes/LanguagesRouter.js";
 
 const app = express();
 app.use(cookieParser());
@@ -31,10 +32,21 @@ app.use(
     credentials: true,
   })
 );
+
+
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  // console.log("Headers:", req.headers);
+  next();
+});
+
+
+
 app.use("/auth", AuthRouter);
 app.use("/products", ProductRouter);
 app.use("/comments", commentsRouter);
 app.use("/cart", cartRouter);
+app.use("/languages", languagesRouter);
 async function connectToDB() {
   try {
     if (!DB_URI) {
@@ -65,11 +77,6 @@ const redisClient = createClient({
 redisClient.on("error", (err) => console.log("Redis redisClient Error", err));
 
 await redisClient.connect();
-
-// redisClient.del("products?limit=20&page=0")
-// await redisClient.del('foo', 'bar');
-// const result = await redisClient.get('foo');
-// console.log(result)  // >>> bar
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to Cartique");

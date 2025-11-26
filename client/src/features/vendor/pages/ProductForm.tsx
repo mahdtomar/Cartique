@@ -8,8 +8,10 @@ import { validateProductForm } from "../validation/ProductFormValidation";
 import Request from "@/common/api/axios";
 import InputField from "@/common/components/misc/InputField";
 import UploadImagePreview from "@/common/components/misc/UploadImagePreview";
+import { useForm, type SubmitHandler } from 'react-hook-form'
+import MultiLanguageInput from "@/common/components/misc/MultiLanguageInput";
 type formdataTypes = {
-	title: string;
+	title: Map<string, string>;
 	briefDescription: string;
 	cost: string;
 	finalPrice: string;
@@ -43,7 +45,7 @@ const ProductForm = () => {
 	const [basePriceError, setBasePriceError] = useState("");
 	const [categoryError, setCategoryError] = useState("");
 	const [imageError, setImageError] = useState("");
-
+	const { register, handleSubmit } = useForm<formdataTypes>()
 	const submitProduct = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const errors = validateProductForm({
@@ -160,15 +162,25 @@ const ProductForm = () => {
 		category,
 		image,
 	]);
+	const onSubmit: SubmitHandler<formdataTypes> = (data) => console.log(data)
 	return (
 		<div className="container  ">
 			<form
-				onSubmit={(e) => submitProduct(e)}
+				onSubmit={handleSubmit(onSubmit)}
 				className="flex flex-col items-stretch p-2 rounded mt-10 shadow-[0px_0px_16px_0px_rgba(0,0,0,0.2)]"
 				id="formi"
 			>
 				<div className="flex gap-4">
 					<div className="w-full flex flex-col gap-2">
+						<MultiLanguageInput
+							// id="title"
+							name="title.en"
+							// placeholder="Ex. Smart Tv 55inch Screen"
+							type="text"
+							label="title"
+							// {...register("title")}
+							register={register}
+						/>
 						<InputField
 							id="title"
 							placeholder="Ex. Smart Tv 55inch Screen"

@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import cartIcon from "./../../assets/icons/ShoppingCartSimple.svg";
 import { useTranslation } from "react-i18next";
 import { useContext } from "react";
-import { languageContext } from "../../context/LanguageProvider";
+import { TranslationContext } from "../../context/TranslationContext";
 import GlobalProductSearch from "@/common/components/navbar/GlobalProductSearch";
 const Navbar = () => {
     type NavLink = {
@@ -19,7 +19,7 @@ const Navbar = () => {
         { url: "/store", title: t("navigation.store") },
         { url: "/contact-us", title: t("navigation.contact") },
     ];
-    const { toggleLang } = useContext(languageContext);
+    const { toggleLang } = useContext(TranslationContext);
     // const toggleLang = () => {
     //     if (i18n.language === "ar") {
     //         i18n.changeLanguage("en");

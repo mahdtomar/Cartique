@@ -6,13 +6,7 @@ import UserProvider from "./common/context/UserProvider";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 // import i18n from '';
-const queryClient = new QueryClient({
-    defaultOptions: {
-        queries: {
-            refetchOnWindowFocus: false,
-        },
-    },
-})
+
 
 function App() {
     console.log("Detected language:", i18n.language);
@@ -20,9 +14,7 @@ function App() {
     return (
         <>
             <UserProvider>
-                <QueryClientProvider client={queryClient}>
                     <MainRouter />
-                </QueryClientProvider>
             </UserProvider>
         </>
     );

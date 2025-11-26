@@ -14,16 +14,16 @@ const costValidation: [(val: number) => boolean, string] = [
 ];
 
 type Product = {
-  title: string;
-  description: string;
-  briefDescription: string;
+  title: Map<string, string>;
+  description: Map<string, string>;
+  briefDescription: Map<string, string>;
   cost: number;
   basePrice: number;
   discountPercentage: number;
   finalPrice: number;
   image: string;
   vendor_id: mongoose.ObjectId;
-  category: string;
+  category: mongoose.ObjectId;
   warehouse_id: string;
   rating: number;
   ratingCount: number;
@@ -42,15 +42,15 @@ interface ProductDocument extends Product, mongoose.Document {
 const productSchema = new mongoose.Schema<ProductDocument>(
   {
     title: {
-      type: String,
+      type: Map,
       required: true,
       maxlength: 100,
     },
     description: {
-      type: String,
+      type: Map,
     },
     briefDescription: {
-      type: String,
+      type: Map,
       required: true,
     },
     cost: {
@@ -111,7 +111,8 @@ const productSchema = new mongoose.Schema<ProductDocument>(
   { timestamps: true }
 );
 
-productSchema.index({ title: "text" });
+productSchema.index({ "title.en": 1 }, { unique: true, sparse: true });
+productSchema.index({ "title.ar": 1 }, { unique: true, sparse: true });
 
 // public version of the product to prevent leaking important data
 productSchema.methods.toPublicJSON = function () {

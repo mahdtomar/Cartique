@@ -1,15 +1,16 @@
 import mongoose from "mongoose";
 
-type Category = {
-  title: string;
+export type CategoryType = {
+  title: Map<string, string>; // for supporting multiple languages keys
 };
-const schema = new mongoose.Schema<Category>({
+
+const schema = new mongoose.Schema<CategoryType>({
   title: {
-    type: String,
     required: true,
-    unique: true,
+    type: Map,
+    of: String,
   },
-}); 
+});
 
 const Category = mongoose.model("Category", schema);
 export default Category;

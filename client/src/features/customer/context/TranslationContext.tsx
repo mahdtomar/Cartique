@@ -1,13 +1,13 @@
 import { createContext, useEffect, type Context } from "react";
 import { useTranslation } from "react-i18next";
 
-export const languageContext: Context<contextType> = createContext({
-    toggleLang: () => {},
+export const TranslationContext: Context<contextType> = createContext({
+    toggleLang: () => { },
 });
 type contextType = {
     toggleLang: () => void;
 };
-const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
+const TranslationProvider = ({ children }: { children: React.ReactNode }) => {
     const { i18n } = useTranslation();
     const toggleLang = () => {
         if (i18n.language === "ar") {
@@ -20,10 +20,10 @@ const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
         document.body.dir = i18n.language === "ar" ? "rtl" : "ltr";
     }, [i18n.language]);
     return (
-        <languageContext.Provider value={{ toggleLang }}>
+        <TranslationContext.Provider value={{ toggleLang }}>
             {children}
-        </languageContext.Provider>
+        </TranslationContext.Provider>
     );
 };
 
-export default LanguageProvider;
+export default TranslationProvider;
