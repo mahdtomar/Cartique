@@ -4,6 +4,7 @@ import Request from "@/common/api/axios"
 import type { Product } from "@/types/Store"
 import Spinner from "@/common/components/misc/Spinner"
 import { Link } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
 const RelatedProducts = ({ category, productId }: { category: string, productId: string }) => {
 
@@ -11,6 +12,7 @@ const RelatedProducts = ({ category, productId }: { category: string, productId:
         const res = await Request<Product[]>("/products/category", "GET", true, undefined, { category, productId })
         return res.data as Product[]
     }
+    const { t } = useTranslation(["productPage", 'common'])
 
 
     const { data: products = [], isLoading, isError, error } = useQuery({
@@ -35,9 +37,12 @@ const RelatedProducts = ({ category, productId }: { category: string, productId:
             </h2>
         )
     }
+    if (products.length === 0) {
+        return
+    }
     return (
         <div className="container flex flex-col justify-center items-stretch gap-2">
-            <h2 className="text-2xl text-center">Related Products</h2>
+            <h2 className="text-2xl text-center">{t("relatedProducts")}</h2>
             <div className="slider overflow-x-auto scroll-smooth snap-x snap-mandatory">
                 <div className="flex gap-4 w-max flex-nowrap">
                     {products.map((product) => (
@@ -56,7 +61,7 @@ const RelatedProducts = ({ category, productId }: { category: string, productId:
                 </div>
             </div>
             <div className="flex justify-center w-full">
-                <button className="primary">View More</button>
+                <button className="primary">{t("common:viewMore")}</button>
             </div>
         </div>
     )

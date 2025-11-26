@@ -1,4 +1,7 @@
 {
+  "viewMore":"view more",
+  "addToCart":"add to cart",
+  "delete":"حذف",
     "navigation": {
         "home": "home",
         "store": "store",

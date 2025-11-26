@@ -42,6 +42,7 @@ export const addComment = asyncWrapper(async (req, res) => {
     review: review.trim(),
     product_id: productId,
   });
+  product.addComment(rating);
   return Success(res, 201, { comment });
 });
 

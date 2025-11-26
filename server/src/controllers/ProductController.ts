@@ -3,9 +3,11 @@ import asyncWrapper from "../utils/AsyncWrapper.js";
 import { Success, Fail } from "../utils/ServerResponses.js";
 import Product from "../models/ProductModel.js";
 import redisClient from "../cache/redisClient.js";
+
 /**
  * add new public product
  */
+// TODO Add validation before saving
 export const AddProduct = asyncWrapper(async (req: Request, res: Response) => {
   const product = new Product({ ...req.body, vendor_id: req.user?.id });
   await product.save();
@@ -117,9 +119,10 @@ export const getProduct = asyncWrapper(async (req, res) => {
       : Fail(res, 500, "unknown Error");
   }
 });
+
 /**
  * recieves a string from frontend and query the products by title and return matching products titles with max length of 5 products
- * @returns array { _id: string, title:string}[]
+ * @returns `array { _id: string, title:string}[]`
  */
 export const getProductSuggestion = asyncWrapper(async (req, res) => {
   const search = typeof req.query.search === "string" ? req.query.search : "";
@@ -151,6 +154,10 @@ export const getProductSuggestion = asyncWrapper(async (req, res) => {
   Success(res, 200, products, "search suggestions");
 });
 
+/**
+ * accepts a `category`, `productId` queries 
+ * @return {Array} `product[]` *10 products* of the same category as the product
+ */
 export const getRelatedProducts = asyncWrapper(async (req, res) => {
   const { category,productId } = req.query;
   const cacheKey = `related-products-${category}`;

@@ -1,5 +1,5 @@
 import Logo from "./Logo";
-import searchIcon from "./../../assets/icons/MagnifyingGlass.svg";
+// import searchIcon from "./../../assets/icons/MagnifyingGlass.svg";
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
@@ -58,8 +58,8 @@ const Navbar = () => {
                         </li>
                     ))}
                     <li>
-                        <Link to={"/check-out"}>
-                            <img src={cartIcon} alt="shopping cart" />
+                        <Link to={"/cart"}>
+                            <img src={cartIcon} alt="shopping cart" className="cursor-pointer" />
                         </Link>
                     </li>
                     <li>

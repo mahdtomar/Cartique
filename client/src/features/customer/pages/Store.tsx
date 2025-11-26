@@ -6,6 +6,7 @@ import Request from "@/common/api/axios"
 import { useDebounce } from "@/common/hooks/useDebounce"
 import Pagination from "../components/store/Pagination"
 import Spinner from "@/common/components/misc/Spinner"
+import { useTranslation } from "react-i18next"
 
 const fetchProducts = async (
     page: number,
@@ -26,6 +27,7 @@ const Store = () => {
     const storePage = Number(searchParams.get("page")) || 1;
     const productsCount = 20;
     const search = useDebounce(rawSearch, 500);
+    const { t } = useTranslation('store');
 
     const { data: products, isLoading, isError, error } = useQuery<Product[]>({
         queryFn: () => fetchProducts(storePage, productsCount, search),
@@ -52,8 +54,8 @@ const Store = () => {
 
     return (
         <div className="container">
-            <h1 className="text-4xl">Shop All Products</h1>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:flex lg:justify-between flex-wrap justify-items-center gap-4">
+            <h1 className="text-4xl">{t("header")}</h1>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:flex lg:justify-center flex-wrap justify-items-center gap-4">
                 {(
                     products?.length === 0 ? <div className="text-center">sorry, no products found with the title <b>{search}</b></div>
                         : products?.map((product) => (

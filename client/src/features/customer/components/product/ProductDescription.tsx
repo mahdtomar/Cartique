@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import parse from "html-react-parser";
+import { useTranslation } from "react-i18next";
 
 const ProductDescription = ({ description }: { description: string }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [height, setHeight] = useState(0);
     const contentRef = useRef<HTMLDivElement>(null);
+    const { t } = useTranslation("productPage")
 
     useEffect(() => {
         if (contentRef.current) {
@@ -14,7 +16,7 @@ const ProductDescription = ({ description }: { description: string }) => {
     if (height > 150) {
         return (
             <div className="relative">
-                <h2 className="text-center text-2xl mb-2">Description</h2>
+                <h2 className="text-center text-2xl mb-2">{t("description")}</h2>
                 <div
                     style={{
                         maxHeight: isOpen ? `${height}px` : "80px",
@@ -46,15 +48,16 @@ const ProductDescription = ({ description }: { description: string }) => {
                 </p>
             </div>
         );
-    } else {
-        return (
-            <div className="container">
-                <h2 className="text-center text-2xl mb-2">Description</h2>
-
-                <div ref={contentRef}>{parse(description)}</div>
-            </div>
-        );
     }
+
+    return (
+        <div className="container">
+            <h2 className="text-center text-2xl mb-2">{t("description")}</h2>
+
+            <div ref={contentRef}>{parse(description)}</div>
+        </div>
+    );
+
 };
 
 export default ProductDescription;

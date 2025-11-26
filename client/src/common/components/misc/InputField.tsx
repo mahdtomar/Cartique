@@ -32,7 +32,7 @@ const InputField = ({
                     placeholder={placeholder}
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
-                    name={value}
+                    name={name}
                 />
                 <p className="text-red-400 font-bold">{error}</p>
             </label>

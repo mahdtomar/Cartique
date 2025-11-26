@@ -1,5 +1,6 @@
 import type { User } from "@/types/User";
 import React, { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 // import { useFetch } from "../hooks/useFetch";
 
@@ -73,8 +74,8 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
         </UserContext.Provider>
     );
 };
-export const NavigateToLogin = (navigate: (e: string) => void) => {
-    // const navigate = useNavigate()
+export const NavigateToLogin = () => {
+    const navigate = useNavigate()
     navigate("/login")
 }
 export default UserProvider;
